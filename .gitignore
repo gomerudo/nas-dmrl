@@ -109,3 +109,6 @@ venv.bak/
 
 # vs code
 .vscode/**
+
+# Tests for atari model
+atari_model*
