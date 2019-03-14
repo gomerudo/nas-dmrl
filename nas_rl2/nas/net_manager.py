@@ -8,21 +8,35 @@ class NetManager():
     """The class in charge of obtained the rewards for the network."""
 
     def __init__(self, num_input, num_classes, learning_rate, mnist,
-                 max_step_per_action=5500*3,
-                 bathc_size=100,
+                 max_step_per_action=5500*3, batch_size=100,
                  dropout_rate=0.85):
-        """Constructor."""
+        """Constructor.
+
+        Params:
+            num_input (int)
+            num_classes (int)
+            learning_rate (float)
+            mnist (?)
+            max_step_per_action (int)
+            batch_size (int)
+            dropout_rate (float)
+        """
         self.num_input = num_input
         self.num_classes = num_classes
         self.learning_rate = learning_rate
         self.mnist = mnist
-
         self.max_step_per_action = max_step_per_action
-        self.bathc_size = bathc_size
+        self.batch_size = batch_size
         self.dropout_rate = dropout_rate
 
     def get_reward(self, action, step, pre_acc):
-        """Compute of the reward."""
+        """Compute the reward for a given action.
+
+        Args:
+            action
+            step
+            pre_acc
+        """
         action = [action[0][0][x:x+4] for x in range(0, len(action[0][0]), 4)]
         cnn_drop_rate = [c[3] for c in action]
 
@@ -42,7 +56,7 @@ class NetManager():
 
                     for step in range(self.max_step_per_action):
                         batch_x, batch_y = self.mnist.train.next_batch(
-                            self.bathc_size
+                            self.batch_size
                         )
                         feed = {model.X: batch_x,
                                 model.Y: batch_y,
