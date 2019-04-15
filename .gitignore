@@ -109,3 +109,6 @@ venv.bak/
 
 # vs code
 .vscode/**
+
+# my workspace
+workspace/**
