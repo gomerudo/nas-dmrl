@@ -11,7 +11,7 @@ source ${SETUP_CONDA_PATH}
 source activate ${VENV_NAME}
 
 # install the packages
-conda install gym
+pip install gym
 conda install pyyaml
 conda install pandas
 conda install tensorflow-gpu

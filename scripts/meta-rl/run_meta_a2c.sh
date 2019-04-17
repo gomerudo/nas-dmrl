@@ -25,6 +25,6 @@ time python -m baselines.run \
 --env=PongNoFrameskip-v4 \
 --network=lstm \
 --save_path=${SAVE_DIR} \
---n_tasks=1
+--n_tasks=1 \
 --num_timesteps=1000
 popd
