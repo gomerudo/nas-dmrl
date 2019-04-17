@@ -24,7 +24,7 @@ time python -m baselines.run \
 --alg=meta_a2c \
 --env=PongNoFrameskip-v4 \
 --network=lstm \
---save_path=${SAVE_DIR} \
+--save_path=${SAVE_DIR}/meta_a2c.model \
 --n_tasks=1 \
 --num_timesteps=1000
 popd

@@ -10,8 +10,12 @@ source ${SETUP_CONDA_PATH}
 # Source the environment
 source activate ${VENV_NAME}
 
-# install the packages
+############################# INSTALL THE PACKAGES #############################
+
+# Not available in conda, use pip
 pip install gym
+pip install opencv-python
+# Available in conda
 conda install pyyaml
 conda install pandas
 conda install tensorflow-gpu
