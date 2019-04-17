@@ -19,7 +19,7 @@ fi
 echo "save_path directory is: ${SAVE_DIR}"
 
 # Run the baseline
-pushd ${OPENAI_BASELINES_PATH}/baselines
+pushd ${OPENAI_BASELINES_PATH}
 time python -m baselines.run \
 --alg=a2c \
 --env=PongNoFrameskip-v4 \
