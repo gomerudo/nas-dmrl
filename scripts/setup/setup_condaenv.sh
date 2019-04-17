@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# If the variable is set and it is yes
 if [ -n ${WITH_CONDA} ] && [ "${WITH_CONDA}" == "YES" ]; then
     
     if [ -z ${MINICONDA_PATH} ]; then
@@ -8,7 +9,11 @@ if [ -n ${WITH_CONDA} ] && [ "${WITH_CONDA}" == "YES" ]; then
             VENV_NAME=nasdmrl
         fi
     fi
-
 fi
 
-source ${MINICONDA_PATH}/etc/profile.d/conda.sh
+CONDA_SH=${MINICONDA_PATH}/etc/profile.d/conda.sh
+if [ -f ${CONDA_SH} ]; then
+    source ${CONDA_SH}
+else
+    echo "Error loading conda loader: ${CONDA_SH}"
+fi
