@@ -14,6 +14,7 @@ fi
 CONDA_SH=${MINICONDA_PATH}/etc/profile.d/conda.sh
 if [ -f ${CONDA_SH} ]; then
     source ${CONDA_SH}
+    echo "Successfully loaded: conda"
 else
     echo "Error loading conda loader: ${CONDA_SH}"
 fi

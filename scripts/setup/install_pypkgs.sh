@@ -10,11 +10,6 @@ source ${SETUP_CONDA_PATH}
 # Source the environment
 source activate ${VENV_NAME}
 
-which conda
-which pip
-which python
 # install the packages
-# conda install gym
-# conda install pyyaml
-
-
+pip install gym
+pip install pyyaml
