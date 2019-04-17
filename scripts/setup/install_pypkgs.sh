@@ -16,6 +16,7 @@ source activate ${VENV_NAME}
 pip install gym
 pip install opencv-python
 # Available in conda
+conda install joblib
 conda install pyyaml
 conda install pandas
 conda install tensorflow-gpu
