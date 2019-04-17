@@ -1,7 +1,10 @@
 #!/bin/bash
 
-WORKSPACE=${HOME}/workspace
-GIT_STORAGE=${WORKSPACE}/git_storage
+CURRENT_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+SET_GLOBALVARS_PATH=${CURRENT_SCRIPT_DIR}/set_globalvars.sh
+
+# Load the global vars
+source ${SET_GLOBALVARS_PATH}
 
 # OpenAI baselines repo
 METARL_REPO_URL=https://github.com/gomerudo/openai-baselines.git
