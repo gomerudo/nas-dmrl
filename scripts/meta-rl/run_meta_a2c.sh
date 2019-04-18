@@ -23,8 +23,7 @@ pushd ${OPENAI_BASELINES_PATH}
 time python -m baselines.run \
 --alg=meta_a2c \
 --env=PongNoFrameskip-v4 \
---network=lstm \
+--network=meta_lstm \
 --save_path=${SAVE_DIR}/meta_a2c.model \
---n_tasks=1 \
---num_timesteps=1000
+--n_tasks=1
 popd
