@@ -20,9 +20,11 @@ echo "save_path directory is: ${SAVE_DIR}"
 
 # Run the baseline
 pushd ${OPENAI_BASELINES_PATH}
+git checkout master
 time python -m baselines.run \
 --alg=a2c \
---env=PongNoFrameskip-v4 \
+--env=AssaultNoFrameskip-v0 \
 --network=lstm \
---save_path=${SAVE_DIR}/a2c.model
+--save_path=${SAVE_DIR}/a2c.model \
+--num_timesteps=1e7
 popd
