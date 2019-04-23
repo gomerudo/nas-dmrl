@@ -11,5 +11,5 @@ source ${SETUP_CONDA_PATH}
 source activate ${VENV_NAME}
 
 pushd ${NASENV_PATH}
-python -m test -v
+python -m unittest -v test/test_default_db.py
 popd
