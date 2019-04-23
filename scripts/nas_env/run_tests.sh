@@ -13,7 +13,7 @@ source activate ${VENV_NAME}
 pushd ${NASENV_PATH}
 time python -m unittest -v \
 test/test_default_db.py \
-test_net_builder.py \
-test_net_trainer.py \
-test_default_nasenv.py
+test/test_net_builder.py \
+test/test_net_trainer.py \
+test/test_default_nasenv.py
 popd
