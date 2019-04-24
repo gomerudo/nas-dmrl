@@ -8,7 +8,7 @@ source ${SET_GLOBALVARS_PATH}
 # Load the conda script
 source ${SETUP_CONDA_PATH}
 # Source the environment
-source activate ${VENV_NAME}
+conda activate ${VENV_NAME}
 
 pushd ${NASENV_PATH}
 time python -m unittest -v \
@@ -17,3 +17,5 @@ test/test_net_builder.py \
 test/test_net_trainer.py \
 test/test_default_nasenv.py
 popd
+
+conda deactivate

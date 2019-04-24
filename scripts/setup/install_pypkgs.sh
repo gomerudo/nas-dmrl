@@ -8,15 +8,19 @@ source ${SET_GLOBALVARS_PATH}
 # Load the conda script
 source ${SETUP_CONDA_PATH}
 # Source the environment
-source activate ${VENV_NAME}
+conda activate ${VENV_NAME}
 
 ############################# INSTALL THE PACKAGES #############################
 
-# Not available in conda, use pip
-pip install gym
-pip install opencv-python
 # Available in conda
 conda install joblib
 conda install pyyaml
 conda install pandas
-conda install tensorflow-gpu
+conda install tensorflow-gpu=1.12.0
+conda install cudatoolkit=9.0  # Immediately downgrade
+
+# Not available in conda, use pip
+pip install gym
+pip install opencv-python
+
+conda deactivate

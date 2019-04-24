@@ -8,7 +8,7 @@ source ${SET_GLOBALVARS_PATH}
 # Load the conda script
 source ${SETUP_CONDA_PATH}
 # Source the environment
-source activate ${VENV_NAME}
+conda activate ${VENV_NAME}
 
 TIMESTAMP=`date "+%Y%m%d-%H%M%S"`
 SAVE_DIR=${WORKSPACE}/results/meta_a2c-${TIMESTAMP}
@@ -30,3 +30,5 @@ time python -m baselines.run \
 --tmp_save_path=${SAVE_DIR}/meta_a2c_tmp.model \
 --num_timesteps=1e7
 popd
+
+conda deactivate
