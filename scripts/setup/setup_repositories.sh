@@ -13,7 +13,7 @@ METARL_REPO_NAME=openai-baselines
 
 # NasGym repo
 NASENV_REPO_URL=https://github.com/gomerudo/nas-env.git
-NASENV_REPO_BRANCH=master
+NASENV_REPO_BRANCH=develop
 NASENV_REPO_NAME=nas-env
 
 if [ ! -d ${GIT_STORAGE} ]; then
@@ -26,6 +26,7 @@ pushd ${GIT_STORAGE}
 # 1. Clone the openai-baselines repository
 if [ -d ${GIT_STORAGE}/${METARL_REPO_NAME} ]; then
     pushd ${GIT_STORAGE}/${METARL_REPO_NAME}
+    git fetch
     git pull origin ${METARL_REPO_BRANCH}
     popd
 else
@@ -34,6 +35,7 @@ fi
 
 # 2. Clone the nas-env repository
 if [ -d ${GIT_STORAGE}/${NASENV_REPO_NAME} ]; then
+    git fetch
     pushd ${GIT_STORAGE}/${NASENV_REPO_NAME}
     git pull origin ${NASENV_REPO_BRANCH}
     popd

@@ -13,8 +13,8 @@ export OPENAI_LOGDIR=${LOGDIR}
 echo "Updating required git repositories."
 ${NAS_DMRL_PATH}/scripts/setup/setup_repositories.sh
 
-echo "Running Default A2C"
-${NAS_DMRL_PATH}/scripts/meta-rl/run_a2c.sh
+# echo "Running Default A2C"
+# ${NAS_DMRL_PATH}/scripts/meta-rl/run_a2c.sh
 
 echo "Running Meta A2C experiment"
 ${NAS_DMRL_PATH}/scripts/meta-rl/run_meta_a2c.sh
