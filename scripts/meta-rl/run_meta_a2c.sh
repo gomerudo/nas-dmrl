@@ -28,7 +28,6 @@ time python -m baselines.run \
 --network=meta_lstm \
 --save_path=${SAVE_DIR}/meta_a2c_final.model \
 --n_tasks=1 \
---tmp_save_path=${SAVE_DIR}/meta_a2c_tmp.model \
 --num_timesteps=1e6
 popd
 

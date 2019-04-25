@@ -18,3 +18,6 @@ ${NAS_DMRL_PATH}/scripts/setup/setup_repositories.sh
 
 echo "Running Meta A2C experiment"
 ${NAS_DMRL_PATH}/scripts/meta-rl/run_meta_a2c.sh
+
+# Zip the results for easy export
+zip -r ${OPENAI_LOGDIR}.zip ${OPENAI_LOGDIR}
