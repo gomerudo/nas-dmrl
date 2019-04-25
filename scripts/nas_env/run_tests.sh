@@ -11,6 +11,11 @@ source ${SETUP_CONDA_PATH}
 conda activate ${VENV_NAME}
 
 pushd ${NASENV_PATH}
+
+# Remove directories to ensure
+rm -rf workspace/trainer_test
+rm -rf workspace/trainer_test_earlystop
+
 time python -m unittest -v \
 test/test_default_db.py \
 test/test_net_builder.py \

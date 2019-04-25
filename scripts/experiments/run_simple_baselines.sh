@@ -6,6 +6,10 @@ SET_GLOBALVARS_PATH=${CURRENT_SCRIPT_DIR}/../setup/set_globalvars.sh
 # Load the global vars
 source ${SET_GLOBALVARS_PATH}
 
+current_date=`date +%Y%m%d%H%M%S`
+LOGDIR="${WORKSPACE}/results/opeanai-${current_date}"
+export OPENAI_LOGDIR=${LOGDIR}
+
 echo "Updating required git repositories."
 ${NAS_DMRL_PATH}/scripts/setup/setup_repositories.sh
 

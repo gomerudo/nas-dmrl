@@ -11,7 +11,8 @@ source ${SETUP_CONDA_PATH}
 conda activate ${VENV_NAME}
 
 TIMESTAMP=`date "+%Y%m%d-%H%M%S"`
-SAVE_DIR=${WORKSPACE}/results/meta_a2c-${TIMESTAMP}
+SAVE_DIR=${OPENAI_LOGDIR}/models
+
 if [ ! -d ${SAVE_DIR} ]; then
     mkdir -p ${SAVE_DIR}
 fi
@@ -28,7 +29,7 @@ time python -m baselines.run \
 --save_path=${SAVE_DIR}/meta_a2c_final.model \
 --n_tasks=1 \
 --tmp_save_path=${SAVE_DIR}/meta_a2c_tmp.model \
---num_timesteps=1e7
+--num_timesteps=1e6
 popd
 
 conda deactivate
