@@ -10,14 +10,15 @@ source ${SETUP_CONDA_PATH}
 # Source the environment
 conda activate ${VENV_NAME}
 
-TIMESTAMP=`date "+%Y%m%d-%H%M%S"`
+current_date=`date +%Y%m%d%H%M%S`
+LOGDIR="${WORKSPACE}/results/opeanai-${current_date}"
+export OPENAI_LOGDIR=${LOGDIR}
+
 SAVE_DIR=${OPENAI_LOGDIR}/models
 
 if [ ! -d ${SAVE_DIR} ]; then
     mkdir -p ${SAVE_DIR}
 fi
-
-echo "save_path directory is: ${SAVE_DIR}"
 
 # Run the baseline
 pushd ${OPENAI_BASELINES_PATH}
