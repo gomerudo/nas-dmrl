@@ -12,6 +12,9 @@ conda activate ${VENV_NAME}
 
 pushd ${NASENV_PATH}
 
+export TF_ENABLE_MIRRORED_STRATEGY=Y
+export TF_ENABLE_LOG_DEVICE_PLACEMENT=Y
+
 # Remove directories to ensure
 rm -rf workspace/trainer_test
 rm -rf workspace/trainer_test_earlystop
