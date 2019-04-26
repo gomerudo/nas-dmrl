@@ -43,7 +43,7 @@ time python -m baselines.run \
 --num_timesteps=1e3
 
 # Zip the results for easy export
-zip -r nasenv_results.zip workspace
+zip -qr nasenv_results.zip workspace
 popd
 
 conda deactivate
