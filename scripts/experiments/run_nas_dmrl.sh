@@ -41,6 +41,9 @@ time python -m baselines.run \
 --save_path=${SAVE_DIR}/meta_a2c_final.model \
 --n_tasks=1 \
 --num_timesteps=1e3
+
+# Zip the results for easy export
+zip -r nasenv_results.zip workspace
 popd
 
 conda deactivate
@@ -49,9 +52,6 @@ pushd ${OPENAI_LOGDIR}
 cd ..
 dir_name=`basename ${OPENAI_LOGDIR}`
 # Zip the results for easy export
-zip -r ${dir_name}.zip ${dir_name}
+zip -qr ${dir_name}.zip ${dir_name}
 popd
-
-# Zip the results for easy export
-zip -r nasenv_results.zip workspace
 

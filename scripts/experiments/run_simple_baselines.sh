@@ -23,5 +23,5 @@ pushd ${OPENAI_LOGDIR}
 cd ..
 dir_name=`basename ${OPENAI_LOGDIR}`
 # Zip the results for easy export
-zip -r ${dir_name}.zip ${dir_name}
+zip -qr ${dir_name}.zip ${dir_name}
 popd
