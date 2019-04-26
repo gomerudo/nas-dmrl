@@ -21,6 +21,10 @@ echo "save_path directory is: ${SAVE_DIR}"
 
 # Run the baseline
 pushd ${OPENAI_BASELINES_PATH}
+
+mkdir nas-env
+cp -R ${GIT_STORAGE}/nas-env/resources nas-env/.
+
 git checkout experiments
 time python -m baselines.run \
 --alg=meta_a2c \
