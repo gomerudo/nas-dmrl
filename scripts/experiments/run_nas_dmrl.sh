@@ -22,8 +22,15 @@ echo "save_path directory is: ${SAVE_DIR}"
 # Run the baseline
 pushd ${OPENAI_BASELINES_PATH}
 
-mkdir nas-env
+if [ ! -d nas-env ]; then
+    mkdir nas-env
+fi
+
 cp -R ${GIT_STORAGE}/nas-env/resources nas-env/.
+
+if [ ! -d workspace ]; then
+    mkdir workspace
+fi
 
 git checkout experiments
 time python -m baselines.run \
