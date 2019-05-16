@@ -14,6 +14,7 @@ DOWNLOAD_URL=http://www.image-net.org/challenges/LSVRC/2012/nnoupb/${DATASET_TAR
 ################################################################################
 
 if [ ! -f ${DATASRC}/${DATASET_TAR_NAME} ]; then
+    echo "Downloading ${DOWNLOAD_URL} into ${DATASRC} ..."
     wget -P ${DATASRC}/ ${DOWNLOAD_URL}
 else
     echo "Skipping downloading. File ${DATASRC}/${DATASET_TAR_NAME} already exists."

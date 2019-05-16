@@ -26,12 +26,14 @@ fi
 ################################################################################
 
 if [ ! -f ${DATASRC}/${BACKGROUND_ZIP_NAME} ]; then
+    echo "Downloading ${BACKGROUND_ZIP_URL} into ${DATASRC} ..."
     wget -P ${DATASRC}/ ${BACKGROUND_ZIP_URL}
 else
     echo "Skipping downloading. File ${DATASRC}/${BACKGROUND_ZIP_NAME} already exists."
 fi
 
 if [ ! -f ${DATASRC}/${EVALUATION_ZIP_NAME} ]; then
+    echo "Downloading ${EVALUATION_ZIP_URL} into ${DATASRC} ..."
     wget -P ${DATASRC}/ ${EVALUATION_ZIP_URL}
 else
     echo "Skipping downloading. File ${DATASRC}/${EVALUATION_ZIP_URL} already exists."
@@ -41,4 +43,8 @@ fi
 ############################## THE UNZIP PROCESS  ##############################
 ################################################################################
 
+echo "Unzipping ${DATASRC}/${BACKGROUND_ZIP_NAME} into ${${TARGET_DIR}}"
 unzip -q ${DATASRC}/${BACKGROUND_ZIP_NAME} -d ${TARGET_DIR}
+
+echo "Unzipping ${DATASRC}/${EVALUATION_ZIP_NAME} into ${${TARGET_DIR}}"
+unzip -q ${DATASRC}/${EVALUATION_ZIP_NAME} -d ${TARGET_DIR}
