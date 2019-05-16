@@ -43,8 +43,8 @@ fi
 ############################## THE UNZIP PROCESS  ##############################
 ################################################################################
 
-echo "Unzipping ${DATASRC}/${BACKGROUND_ZIP_NAME} into ${${TARGET_DIR}}"
+echo "Unzipping ${DATASRC}/${BACKGROUND_ZIP_NAME} into ${TARGET_DIR}"
 unzip -q ${DATASRC}/${BACKGROUND_ZIP_NAME} -d ${TARGET_DIR}
 
-echo "Unzipping ${DATASRC}/${EVALUATION_ZIP_NAME} into ${${TARGET_DIR}}"
+echo "Unzipping ${DATASRC}/${EVALUATION_ZIP_NAME} into ${TARGET_DIR}"
 unzip -q ${DATASRC}/${EVALUATION_ZIP_NAME} -d ${TARGET_DIR}
