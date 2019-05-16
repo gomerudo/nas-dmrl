@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 CURRENT_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SET_GLOBALVARS_PATH=${CURRENT_SCRIPT_DIR}/../setup/set_globalvars.sh
@@ -34,13 +35,16 @@ if [ ! -d workspace ]; then
 fi
 
 git checkout experiments
+export TF_ENABLE_MIRRORED_STRATEGY=YES
+
 time python -m baselines.run \
 --alg=meta_a2c \
 --env=NAS_cifar10-v1 \
 --network=meta_lstm \
 --save_path=${SAVE_DIR}/meta_a2c_final.model \
 --n_tasks=1 \
---num_timesteps=1e3
+--nsteps=10 \
+--num_timesteps=1e4
 
 # Zip the results for easy export
 zip -qr nasenv_results.zip workspace

@@ -112,3 +112,4 @@ venv.bak/
 
 # my workspace
 workspace/**
+**/.DS_Store
