@@ -9,10 +9,18 @@ DATASET_DIRNAME=ILSVRC2012_img_train
 DATASET_TAR_NAME=${DATASET_DIRNAME}.tar
 DOWNLOAD_URL=http://www.image-net.org/challenges/LSVRC/2012/nnoupb/${DATASET_TAR_NAME}
 
-if [ ! -f ]; then
-    wget -P ${DATASRC_DIR}/ ${DOWNLOAD_URL}
+################################################################################
+############################# THE DOWNLOAD PROCESS #############################
+################################################################################
+
+if [ ! -f ${DATASRC}/${DATASET_TAR_NAME} ]; then
+    wget -P ${DATASRC}/ ${DOWNLOAD_URL}
 else
-    echo "Skipping downloading. File ${DATASRC_DIR}/${DATASET_TAR_NAME} already exists."
+    echo "Skipping downloading. File ${DATASRC}/${DATASET_TAR_NAME} already exists."
 fi
 
-tar -C ${DATASRC_DIR} -xf ${DATASRC_DIR}/${DATASET_TAR_NAME}
+################################################################################
+############################## THE UNTAR PROCESS  ##############################
+################################################################################
+
+tar -C ${DATASRC} -xf ${DATASRC}/${DATASET_TAR_NAME}
