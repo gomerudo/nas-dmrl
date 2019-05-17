@@ -33,4 +33,4 @@ fi
 ############################## THE UNTAR PROCESS  ##############################
 ################################################################################
 
-tar -C ${DATA_TARGZ_NAME} -xf ${DATASRC}/${DATA_TARGZ_NAME}
+tar -C ${TARGET_DIR} -xf ${DATASRC}/${DATA_TARGZ_NAME}
