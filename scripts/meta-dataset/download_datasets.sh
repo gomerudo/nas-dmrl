@@ -106,6 +106,30 @@ case ${DATASET_NAME} in
     imagenet)
         run_custom_download "imagenet"
         ;;
+    aircraft)
+        run_custom_download "aircraft"
+        ;;
+    cu_birds)
+        run_custom_download "cu_birds"
+        ;;
+    dtd)
+        run_custom_download "dtd"
+        ;;
+    quickdraw)
+        run_custom_download "quickdraw"
+        ;;
+    fungi)
+        run_custom_download "fungi"
+        ;;
+    vgg_flower)
+        run_custom_download "vgg_flower"
+        ;;
+    traffic_sign)
+        run_custom_download "traffic_sign"
+        ;;
+    mscoco)
+        run_custom_download "mscoco"
+        ;;
     *)
         echo "Unkown dataset. Exiting with no errors..."
         exit 0
