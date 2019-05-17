@@ -5,33 +5,43 @@ set -e
 ############ DEFINE THE GLOBAL VARIABLES AND ENVIRONMENT VARIABLES  ############
 ################################################################################
 
-# TARGET_DIR=${DATASRC}/fgvc-aircraft-2013b
-DATA_TARGZ_NAME=fgvc-aircraft-2013b.tar.gz
-DATA_ZIP_URL=http://www.robots.ox.ac.uk/~vgg/data/fgvc-aircraft/archives/${DATA_TARGZ_NAME}
+TARGET_DIR=${DATASRC}/vgg_flower
+IMGS_TARGZ_NAME=102flowers.tgz
+ANNOTATIONS_NAME=imagelabels.mat
+
+IMGS_TARGZ_URL=http://www.robots.ox.ac.uk/~vgg/data/flowers/102/${IMGS_TARGZ_NAME}
+ANNOTATIONS_URL=http://www.robots.ox.ac.uk/~vgg/data/flowers/102/${ANNOTATIONS_NAME}
 
 ################################################################################
 ########################## MAKE REQUIRED DIRECTORIES  ##########################
 ################################################################################
 
-# if [ ! -d ${TARGET_DIR} ]; then
-#     echo "Creating directory ${TARGET_DIR}"
-#     mkdir -p ${TARGET_DIR}
-# fi
+if [ ! -d ${TARGET_DIR} ]; then
+    echo "Creating directory ${TARGET_DIR}"
+    mkdir -p ${TARGET_DIR}
+fi
 
 ################################################################################
 ############################# THE DOWNLOAD PROCESS #############################
 ################################################################################
 
-if [ ! -f ${DATASRC}/${DATA_TARGZ_NAME} ]; then
-    echo "Downloading ${DATA_ZIP_URL} into ${DATASRC} ..."
-    wget -P ${DATASRC}/ ${DATA_ZIP_URL}
+if [ ! -f ${DATASRC}/${IMGS_TARGZ_NAME} ]; then
+    echo "Downloading ${IMGS_TARGZ_URL} into ${DATASRC} ..."
+    wget -P ${DATASRC}/ ${IMGS_TARGZ_URL}
 else
-    echo "Skipping downloading. File ${DATASRC}/${DATA_TARGZ_NAME} already exists."
+    echo "Skipping downloading. File ${DATASRC}/${IMGS_TARGZ_NAME} already exists."
+fi
+
+if [ ! -f ${TARGET_DIR}/${ANNOTATIONS_NAME} ]; then
+    echo "Downloading ${ANNOTATIONS_URL} into ${TARGET_DIR} ..."
+    wget -P ${TARGET_DIR}/ ${ANNOTATIONS_URL}
+else
+    echo "Skipping downloading. File ${DATASRC}/${ANNOTATIONS_URL} already exists."
 fi
 
 ################################################################################
 ############################## THE UNTAR PROCESS  ##############################
 ################################################################################
 
-echo "Untaring the dataset ..."
-tar -C ${DATASRC} -xzf ${DATASRC}/${DATA_TARGZ_NAME}
+echo "Untaring ${DATASRC}/${IMGS_TARGZ_NAME} into ${TARGET_DIR}"
+tar -C ${TARGET_DIR} -xzf ${DATASRC}/${IMGS_TARGZ_NAME}

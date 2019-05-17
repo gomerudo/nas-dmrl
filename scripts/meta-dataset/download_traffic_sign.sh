@@ -5,33 +5,33 @@ set -e
 ############ DEFINE THE GLOBAL VARIABLES AND ENVIRONMENT VARIABLES  ############
 ################################################################################
 
-# TARGET_DIR=${DATASRC}/fgvc-aircraft-2013b
-DATA_TARGZ_NAME=fgvc-aircraft-2013b.tar.gz
-DATA_ZIP_URL=http://www.robots.ox.ac.uk/~vgg/data/fgvc-aircraft/archives/${DATA_TARGZ_NAME}
+TARGET_DIR=${DATASRC}/GTSRB
+DATA_ZIP_NAME=GTSRB_Final_Training_Images.zip
+DATA_ZIP_URL=http://benchmark.ini.rub.de/Dataset/${DATA_ZIP_NAME}
 
 ################################################################################
 ########################## MAKE REQUIRED DIRECTORIES  ##########################
 ################################################################################
 
-# if [ ! -d ${TARGET_DIR} ]; then
-#     echo "Creating directory ${TARGET_DIR}"
-#     mkdir -p ${TARGET_DIR}
-# fi
+if [ ! -d ${TARGET_DIR} ]; then
+    echo "Creating directory ${TARGET_DIR}"
+    mkdir -p ${TARGET_DIR}
+fi
 
 ################################################################################
 ############################# THE DOWNLOAD PROCESS #############################
 ################################################################################
 
-if [ ! -f ${DATASRC}/${DATA_TARGZ_NAME} ]; then
+if [ ! -f ${DATASRC}/${DATA_ZIP_NAME} ]; then
     echo "Downloading ${DATA_ZIP_URL} into ${DATASRC} ..."
     wget -P ${DATASRC}/ ${DATA_ZIP_URL}
 else
-    echo "Skipping downloading. File ${DATASRC}/${DATA_TARGZ_NAME} already exists."
+    echo "Skipping downloading. File ${DATASRC}/${DATA_ZIP_NAME} already exists."
 fi
 
 ################################################################################
-############################## THE UNTAR PROCESS  ##############################
+############################## THE UNZIP PROCESS  ##############################
 ################################################################################
 
-echo "Untaring the dataset ..."
-tar -C ${DATASRC} -xzf ${DATASRC}/${DATA_TARGZ_NAME}
+echo "Unzipping the dataset ..."
+unzip -q ${DATASRC}/${DATA_ZIP_NAME} -d ${TARGET_DIR}
