@@ -24,5 +24,6 @@ conda install cloudpickle
 pip install gym
 pip install opencv-python
 pip install atari_py
+pip install gin-config
 
 conda deactivate

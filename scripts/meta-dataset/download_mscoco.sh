@@ -32,9 +32,9 @@ else
     echo "Skipping downloading. File ${DATASRC}/${IMGS_ZIP_NAME} already exists."
 fi
 
-if [ ! -f ${TARGET_DIR}/${ANNOTATIONS_ZIP_NAME} ]; then
+if [ ! -f ${DATASRC}/${ANNOTATIONS_ZIP_NAME} ]; then
     echo "Downloading ${ANNOTATIONS_ZIP_URL} into ${TARGET_DIR} ..."
-    wget -P ${TARGET_DIR}/ ${ANNOTATIONS_ZIP_URL}
+    wget -P ${DATASRC}/ ${ANNOTATIONS_ZIP_URL}
 else
     echo "Skipping downloading. File ${DATASRC}/${ANNOTATIONS_ZIP_URL} already exists."
 fi

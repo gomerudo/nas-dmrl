@@ -7,7 +7,7 @@ set -e
 
 TARGET_DIR=${DATASRC}/GTSRB
 DATA_ZIP_NAME=GTSRB_Final_Training_Images.zip
-DATA_ZIP_URL=http://benchmark.ini.rub.de/Dataset/${DATA_ZIP_NAME}
+DATA_ZIP_URL=https://sid.erda.dk/public/archives/daaeac0d7ce1152aea9b61d9f1e19370/${DATA_ZIP_NAME}
 
 ################################################################################
 ########################## MAKE REQUIRED DIRECTORIES  ##########################

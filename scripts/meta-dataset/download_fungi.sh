@@ -9,8 +9,8 @@ TARGET_DIR=${DATASRC}/fungi
 IMGS_TARGZ_NAME=fungi_train_val.tgz
 ANNOTATIONS_TARGZ_NAME=train_val_annotations.tgz
 
-IMGS_TARGZ_URL=https://data.deic.dk/public.php?service=files&t=2fd47962a38e2a70570f3be027cea57f&download
-ANNOTATIONS_TARGZ_URL=https://data.deic.dk/public.php?service=files&t=8dc110f312677d2b53003de983b3a26e&download
+IMGS_TARGZ_URL=https://data.deic.dk/public.php?service=files&t=2fd47962a38e2a70570f3be027cea57f\&download
+ANNOTATIONS_TARGZ_URL=https://data.deic.dk/public.php?service=files&t=8dc110f312677d2b53003de983b3a26e\&download
 
 ################################################################################
 ########################## MAKE REQUIRED DIRECTORIES  ##########################
