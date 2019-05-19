@@ -1,12 +1,20 @@
 #!/bin/bash
 set -e
 
+
+CURRENT_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+SET_GLOBALVARS_PATH=${CURRENT_SCRIPT_DIR}/../setup/set_globalvars.sh
+
+# Load the global vars
+source ${SET_GLOBALVARS_PATH}
+# Load the conda script
+source ${SETUP_CONDA_PATH}
+# Source the environment
+conda activate ${VENV_NAME}
+
 ################################################################################
 ############ DEFINE THE GLOBAL VARIABLES AND ENVIRONMENT VARIABLES  ############
 ################################################################################
-
-# Global vars
-WORKSPACE=${HOME}/workspace
 
 # Env vars required by meta-dataset's code
 DATASRC_DIR=${WORKSPACE}/metadataset_storage
@@ -65,11 +73,13 @@ usage() {
 }
 
 run_convertion() {
+    pushd ${GIT_STORAGE}/meta-dataset
     python -m meta_dataset.dataset_conversion.convert_datasets_to_records \
         --dataset=${1} \
         --${1}_data_root=$DATASRC/${2} \
         --splits_root=$SPLITS \
         --records_root=$RECORDS
+    popd
 }
 
 ################################################################################
