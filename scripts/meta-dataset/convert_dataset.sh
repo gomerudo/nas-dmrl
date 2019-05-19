@@ -74,7 +74,8 @@ usage() {
 
 run_convertion() {
     pushd ${GIT_STORAGE}/meta-dataset
-    python -m meta_dataset.dataset_conversion.convert_datasets_to_records \
+    echo "Executing conversion of dataset '${1}'"
+    time python -m meta_dataset.dataset_conversion.convert_datasets_to_records \
         --dataset=${1} \
         --${1}_data_root=$DATASRC/${2} \
         --splits_root=$SPLITS \
