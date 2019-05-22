@@ -4,7 +4,6 @@ The main goal is to manually verify the correctness of the TFRecords, in terms
 of the number of classes available and the elements per class.
 """
 
-import sys
 import glob
 import argparse
 import tensorflow as tf
@@ -15,6 +14,7 @@ def get_sorted_tfrecords(src_dir):
     return sorted(
         glob.glob("{dir}/*.tfrecords".format(dir=src_dir))
     )
+
 
 def make_summary_dict(tfrecords_list):
     summary = dict()
@@ -62,6 +62,7 @@ def print_summary(summary_dict):
     print("\t| Total\t | {t}\t |".format(t=count))
     print("\t {l} ".format(l="-"*16))
 
+
 if __name__ == '__main__':
     # Define the arguments
 
@@ -83,5 +84,3 @@ if __name__ == '__main__':
     summary_dict = make_summary_dict(tfrecords_list)
 
     print_summary(summary_dict)
-
-    
