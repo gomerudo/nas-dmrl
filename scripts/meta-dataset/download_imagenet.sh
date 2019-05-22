@@ -36,3 +36,12 @@ fi
 
 echo "Untaring ${DATASRC}/${DATASET_TAR_NAME} into ${TARGET_DIR}"
 tar -C ${TARGET_DIR} -xf ${DATASRC}/${DATASET_TAR_NAME}
+
+for FILE in ${TARGET_DIR}/*.tar; do
+    subtarget_dir=${FILE%.*}
+    if [ ! -d ${subtarget_dir} ]; then
+        mkdir -p ${subtarget_dir}
+    fi
+    echo "Untaring ${FILE} ..."
+    tar -C ${subtarget_dir} -xf ${FILE}
+done

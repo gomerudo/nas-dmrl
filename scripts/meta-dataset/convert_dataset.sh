@@ -120,28 +120,28 @@ case ${DATASET_NAME} in
         exit 0
         ;;
     aircraft)
-        exit 0
+        run_convertion ${DATASET_NAME} fgvc-aircraft-2013b
         ;;
     cu_birds)
-        exit 0
+        run_convertion ${DATASET_NAME} CUB_200_2011
         ;;
     dtd)
-        exit 0
+        run_convertion ${DATASET_NAME} ${DATASET_NAME}
         ;;
     quickdraw)
-        exit 0
+        run_convertion ${DATASET_NAME} ${DATASET_NAME}
         ;;
     fungi)
-        exit 0
+        run_convertion ${DATASET_NAME} ${DATASET_NAME}
         ;;
     vgg_flower)
-        exit 0
+        run_convertion ${DATASET_NAME} ${DATASET_NAME}
         ;;
     traffic_sign)
-        exit 0
+        run_convertion ${DATASET_NAME} GTSRB
         ;;
     mscoco)
-        exit 0
+        run_convertion ${DATASET_NAME} ${DATASET_NAME}
         ;;
     *)
         echo "Unkown dataset. Exiting with no errors..."
