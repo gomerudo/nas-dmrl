@@ -12,13 +12,16 @@ source ${SETUP_CONDA_PATH}
 conda activate ${VENV_NAME}
 
 ################################################################################
-############ DEFINE THE GLOBAL VARIABLES AND ENVIRONMENT VARIABLES  ############
-################################################################################
-
-
-################################################################################
 ########################### READ THE REQUESTED ARGS  ###########################
 ################################################################################
+
+usage() {
+    echo "Usage:"
+    echo ""
+    echo "     run_explorer.sh -d DATASET_ID"
+    echo ""
+    echo "Supported IDs are: aircraft, dtd, fungi, quickdraw, vgg_flower, cu_birds, mscoco, omniglot, traffic_sign"
+}
 
 while getopts ":d:" opt; do
   case ${opt} in
