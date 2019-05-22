@@ -9,8 +9,8 @@ TARGET_DIR=${DATASRC}/fungi
 IMGS_TARGZ_NAME=fungi_train_val.tgz
 ANNOTATIONS_TARGZ_NAME=train_val_annotations.tgz
 
-IMGS_TARGZ_URL=https://data.deic.dk/public.php?service=files&t=2fd47962a38e2a70570f3be027cea57f\&download
-ANNOTATIONS_TARGZ_URL=https://data.deic.dk/public.php?service=files&t=8dc110f312677d2b53003de983b3a26e\&download
+IMGS_TARGZ_URL="https://data.deic.dk/public.php?service=files&t=2fd47962a38e2a70570f3be027cea57f&download"
+ANNOTATIONS_TARGZ_URL="https://data.deic.dk/public.php?service=files&t=8dc110f312677d2b53003de983b3a26e&download"
 
 ################################################################################
 ########################## MAKE REQUIRED DIRECTORIES  ##########################
@@ -27,14 +27,14 @@ fi
 
 if [ ! -f ${DATASRC}/${IMGS_TARGZ_NAME} ]; then
     echo "Downloading ${IMGS_TARGZ_URL} into ${DATASRC} ..."
-    wget -P ${DATASRC}/ ${IMGS_TARGZ_URL}
+    wget -O ${DATASRC}/${IMGS_TARGZ_NAME} ${IMGS_TARGZ_URL}
 else
     echo "Skipping downloading. File ${DATASRC}/${IMGS_TARGZ_NAME} already exists."
 fi
 
 if [ ! -f ${DATASRC}/${ANNOTATIONS_TARGZ_NAME} ]; then
     echo "Downloading ${ANNOTATIONS_TARGZ_URL} into ${DATASRC} ..."
-    wget -P ${DATASRC}/ ${ANNOTATIONS_TARGZ_URL}
+    wget -O ${DATASRC}/${ANNOTATIONS_TARGZ_NAME} ${ANNOTATIONS_TARGZ_URL}
 else
     echo "Skipping downloading. File ${DATASRC}/${ANNOTATIONS_TARGZ_URL} already exists."
 fi
