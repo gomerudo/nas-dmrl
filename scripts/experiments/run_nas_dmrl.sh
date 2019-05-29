@@ -176,7 +176,7 @@ for trial in $(seq 1  1 ${N_TRIALS}); do
         fi
     else
         if [ ! -z ${LAST_OPENAI_LOGDIR} ]; then
-            command="${command} --load_path=${LAST_OPENAI_LOGDIR}"
+            command="${command} --load_path=${LAST_OPENAI_LOGDIR}/models/${FINAL_MODEL_NAME}"
         fi
     fi
 
