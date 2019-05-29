@@ -110,6 +110,7 @@ conda activate ${VENV_NAME}
 ########################## MAKE EXPERIMENTS DIRECTORY ##########################
 ################################################################################
 EXPERIMENT_DIR="${WORKSPACE}/results/experiment-${START_TIMESTAMP}"
+echo "Directory for the experiment is ${EXPERIMENT_DIR}"
 
 if [ ! -d ${EXPERIMENT_DIR} ]; then
     echo "Making directory for the experiment"
