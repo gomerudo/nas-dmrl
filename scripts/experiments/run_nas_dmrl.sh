@@ -151,7 +151,7 @@ for trial in $(seq 1  1 ${N_TRIALS}); do
     LAST_OPENAI_LOGDIR="${OPENAI_LOGDIR}"
 
     # Export the OPENAI_LOGDIR as needed by openai-baselines project
-    LOGDIR="${EXPERIMENT_DIR}/opeanai-${TRIAL_TIMESTAMP}"
+    LOGDIR="${EXPERIMENT_DIR}/openai-${TRIAL_TIMESTAMP}"
     export OPENAI_LOGDIR=${LOGDIR}
 
     # Define the place where we will store the resulting model
