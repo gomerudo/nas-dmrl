@@ -7,7 +7,7 @@
 usage() {
     echo "Usage:"
     echo ""
-    echo "     run_nas_dmrl.sh -c CONFIG_FILE [-m PREWARM_MODEL]"
+    echo "     run_nas_dmrl.sh -c CONFIG_FILE [-m PREWARM_MODEL] [-r]"
     echo ""
 }
 
@@ -31,7 +31,7 @@ parse_ini_file() {
 ################################ PARSE OPTIONS  ################################
 ################################################################################
 
-while getopts ":c:m:" opt; do
+while getopts ":c:m:r" opt; do
   case ${opt} in
     c )
         INI_FILE=$OPTARG
@@ -39,7 +39,9 @@ while getopts ":c:m:" opt; do
     m )
         WARMUP_MODEL=$OPTARG
         ;;
-
+    r )
+        REMOVE=YES
+        ;;
     \? )
         usage
         exit 1
@@ -183,6 +185,12 @@ for trial in $(seq 1  1 ${N_TRIALS}); do
     echo "Command to execute is: ${command}"
     ${command}
     
+    if [ ! -z ${REMOVE} ]; then
+        rm -rf ${OPENAI_BASELINES_PATH}/workspace/trainer*
+    else
+        echo "NO: ${REMOVE}"
+    fi
+
     # Always wait after the command has been executed
     sleep ${SLEEP_TIME_SECONDS}
 done
