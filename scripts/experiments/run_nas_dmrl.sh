@@ -14,6 +14,7 @@ usage() {
 parse_var() {
     echo `grep  -E "${1}\s*=\s*.+" ${INI_FILE} | sed 's/\([[:alpha:]]*[[:space:]]*=[[:space:]]*\)\(.*\)$/\2/'`
 }
+
 parse_ini_file() {
     RL_ALGORITHM="$(parse_var Algorithm)"
     RL_ENVIRONMENT="$(parse_var Environment)"
@@ -25,6 +26,7 @@ parse_ini_file() {
     N_TRIALS="$(parse_var NTrials)"
     GPU_MONITOR_SECONDS="$(parse_var GPUMonitorSec)"
     SLEEP_TIME_SECONDS="$(parse_var SleepTimeSec)"
+    CONFIG_LOG_PATH="$(parse_var LogPath)"
 }
 
 ################################################################################
@@ -126,7 +128,7 @@ fi
 # Copy the configuration file so that we can know what we config we used
 cp ${INI_FILE} ${EXPERIMENT_DIR}/.
 
-echo "A total of ${N_TRIALS} trials will be tried"
+echo "A total of ${N_TRIALS} trials will be executed"
 
 # Let the nvidia monitoring running in the background for as long as the process runs
 echo "Running GPU monitoring tool in the background. It will log every ${GPU_MONITOR_SECONDS} seconds"
@@ -137,8 +139,9 @@ nvidia-smi \
 
 pushd ${OPENAI_BASELINES_PATH}
 
-if [ ! -d workspace ]; then
-    mkdir workspace
+if [ ! -d ${CONFIG_LOG_PATH} ]; then
+    echo "Making workspace directory"
+    mkdir ${CONFIG_LOG_PATH}
 fi
 
 for trial in $(seq 1  1 ${N_TRIALS}); do
@@ -187,8 +190,6 @@ for trial in $(seq 1  1 ${N_TRIALS}); do
     
     if [ ! -z ${REMOVE} ]; then
         rm -rf ${OPENAI_BASELINES_PATH}/workspace/trainer*
-    else
-        echo "NO: ${REMOVE}"
     fi
 
     # Always wait after the command has been executed
@@ -200,8 +201,8 @@ popd
 conda deactivate
 
 # Copy the db of experiments and the actions_info
-cp ${OPENAI_BASELINES_PATH}/workspace/db_experiments.csv ${EXPERIMENT_DIR}/.
-cp ${OPENAI_BASELINES_PATH}/workspace/actions_info.csv ${EXPERIMENT_DIR}/.
+cp ${CONFIG_LOG_PATH}/db_experiments.csv ${EXPERIMENT_DIR}/.
+cp ${CONFIG_LOG_PATH}/actions_info.csv ${EXPERIMENT_DIR}/.
 
 # Go to the Experiments' parent directory and zip the results
 pushd ${EXPERIMENT_DIR}/..
