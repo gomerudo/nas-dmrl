@@ -23,7 +23,7 @@ usage() {
     echo "Supported IDs are: aircraft, dtd, fungi, quickdraw, vgg_flower, cu_birds, omniglot, traffic_sign"
 }
 
-while getopts ":d:s:t" opt; do
+while getopts ":d:s:t:" opt; do
   case ${opt} in
     d )
         DATASET_ID=$OPTARG
