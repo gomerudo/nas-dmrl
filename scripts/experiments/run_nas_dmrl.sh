@@ -189,7 +189,7 @@ for trial in $(seq 1  1 ${N_TRIALS}); do
     ${command}
     
     if [ ! -z ${REMOVE} ]; then
-        rm -rf ${OPENAI_BASELINES_PATH}/workspace/trainer*
+        rm -rf ${CONFIG_LOG_PATH}/trainer*
     fi
 
     # Always wait after the command has been executed
