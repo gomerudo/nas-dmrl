@@ -67,7 +67,7 @@ if [ -z ${TARGET_FILE} ]; then
     echo "Target file has to be provided"
     usage
 fi
-python ${GIT_STORAGE}/nas-dmrl_md/scripts/meta-dataset/tfrecords_exporter.py \
+python ${GIT_STORAGE}/nas-dmrl_par/scripts/meta-dataset/tfrecords_exporter.py \
     --src_dir=${TFRECORDS_DIR} \
     --imgsize=${IMG_SIZE} \
     --target_file=${TARGET_FILE}
