@@ -24,7 +24,7 @@ def export_to_csv(tfrecords_list, img_size=84, export_path="./exported"):
 
     # 3. Initialize the main csv file
     imgs_df = pd.DataFrame(
-        columns=["f{i}".format(i=x) for x in range(img_size*img_size*3)]
+        columns=["f{i}".format(i=x) for x in range(img_size*img_size*3)] +
         ["label"]
     )
     outfile = open(export_path, 'w')
