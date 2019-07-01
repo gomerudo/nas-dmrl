@@ -1,8 +1,4 @@
-"""This is a simple python script to explore a set of TFRecords.
-
-The main goal is to manually verify the correctness of the TFRecords, in terms
-of the number of classes available and the elements per class.
-"""
+"""Export a TFRecords set of files to a csv, for the meta-dataset."""
 
 import glob
 import argparse
@@ -28,8 +24,8 @@ def export_to_csv(tfrecords_list, img_size=84, export_path="./exported"):
 
     # 3. Initialize the main csv file
     imgs_df = pd.DataFrame(
-        columns=["f{i}".format(i=x) for x in range(img_size*img_size*3)] + \
-                ["label"]
+        columns=["f{i}".format(i=x) for x in range(img_size*img_size*3)]
+        ["label"]
     )
     outfile = open(export_path, 'w')
     imgs_df.to_csv(outfile, index=False)
