@@ -23,10 +23,13 @@ usage() {
     echo "Supported IDs are: aircraft, dtd, fungi, quickdraw, vgg_flower, cu_birds, omniglot, traffic_sign"
 }
 
-while getopts ":d:" opt; do
+while getopts ":d:s:" opt; do
   case ${opt} in
     d )
         DATASET_ID=$OPTARG
+        ;;
+    s )
+        IMG_SIZE=$OPTARG
         ;;
     \? )
         usage
@@ -44,11 +47,20 @@ if [ -z ${DATASET_ID} ]; then
     exit 1
 fi
 
-TFRECORDS_DIR=${WORKSPACE}/metadataset_storage/records/${DATASET_ID}
+if [ -z ${TFRECORDS_DIR} ]; then
+    TFRECORDS_DIR=${WORKSPACE}/metadataset_storage/records/${DATASET_ID}
+fi
+
 if [ ! -d ${TFRECORDS_DIR} ]; then
-    echo "No directory ${TFRECORDS_DIR}"
+    echo "Directory ${TFRECORDS_DIR} does not exist"
     exit 1
 fi
 
+if [ -z ${IMG_SIZE} ]; then
+    IMG_SIZE=84
+fi
+
 python ${GIT_STORAGE}/nas-dmrl_md/scripts/meta-dataset/tfrecords_exporter.py \
-    --path=${TFRECORDS_DIR}
+    --src_dir=${TFRECORDS_DIR} \
+    --imgsize=${IMG_SIZE} \
+    --target_file=${TARGET_FILE}
