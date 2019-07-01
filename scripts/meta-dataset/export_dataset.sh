@@ -18,18 +18,21 @@ conda activate ${VENV_NAME}
 usage() {
     echo "Usage:"
     echo ""
-    echo "     export_dataset.sh -d DATASET_ID"
+    echo "     export_dataset.sh -d DATASET_ID -t TARGET_FILE [-s IMAGE_SIZE]"
     echo ""
     echo "Supported IDs are: aircraft, dtd, fungi, quickdraw, vgg_flower, cu_birds, omniglot, traffic_sign"
 }
 
-while getopts ":d:s:" opt; do
+while getopts ":d:s:t" opt; do
   case ${opt} in
     d )
         DATASET_ID=$OPTARG
         ;;
     s )
         IMG_SIZE=$OPTARG
+        ;;
+    t )
+        TARGET_FILE=$OPTARG
         ;;
     \? )
         usage
@@ -60,6 +63,10 @@ if [ -z ${IMG_SIZE} ]; then
     IMG_SIZE=84
 fi
 
+if [ -z ${TARGET_FILE} ]; then
+    echo "Target file has to be provided"
+    usage
+fi
 python ${GIT_STORAGE}/nas-dmrl_md/scripts/meta-dataset/tfrecords_exporter.py \
     --src_dir=${TFRECORDS_DIR} \
     --imgsize=${IMG_SIZE} \
