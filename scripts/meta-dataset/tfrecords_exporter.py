@@ -68,7 +68,7 @@ def _parser(record, image_size):
     image_resized = tf.image.resize_images(
         image_decoded,
         [image_size, image_size],
-        method=tf.image.ResizeMethod.BICUBIC,
+        method=tf.image.ResizeMethod.BILINEAR,
         align_corners=True
     )
     image_normalized = image_resized / 255.0

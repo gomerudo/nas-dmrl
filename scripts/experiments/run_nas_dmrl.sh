@@ -27,6 +27,7 @@ parse_ini_file() {
     GPU_MONITOR_SECONDS="$(parse_var GPUMonitorSec)"
     SLEEP_TIME_SECONDS="$(parse_var SleepTimeSec)"
     CONFIG_LOG_PATH="$(parse_var LogPath)"
+    LOG_INTERVAL="$(parse_var LogInterval)"
 }
 
 ################################################################################
@@ -173,6 +174,7 @@ for trial in $(seq 1  1 ${N_TRIALS}); do
 --save_path=${SAVE_DIR}/${FINAL_MODEL_NAME} \
 --n_tasks=${N_TASKS} \
 --nsteps=${N_STEPS} \
+--log_interval=${LOG_INTERVAL} \
 --num_timesteps=${N_TIMESTEPS}"
 
     if [ ${trial} -eq 1 ]; then
