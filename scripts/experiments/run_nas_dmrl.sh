@@ -210,3 +210,4 @@ dir_name=`basename ${EXPERIMENT_DIR}`
 echo "Zipping the experiments ..."
 zip -qr ${dir_name}.zip ${dir_name}
 popd
+
