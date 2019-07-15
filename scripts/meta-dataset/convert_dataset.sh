@@ -7,10 +7,6 @@ SET_GLOBALVARS_PATH=${CURRENT_SCRIPT_DIR}/../setup/set_globalvars.sh
 
 # Load the global vars
 source ${SET_GLOBALVARS_PATH}
-# Load the conda script
-source ${SETUP_CONDA_PATH}
-# Source the environment
-conda activate ${VENV_NAME}
 
 ################################################################################
 ############ DEFINE THE GLOBAL VARIABLES AND ENVIRONMENT VARIABLES  ############

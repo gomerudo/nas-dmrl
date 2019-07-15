@@ -165,9 +165,12 @@ for trial in $(seq 1  1 ${N_TRIALS}); do
 --env=${RL_ENVIRONMENT} \
 --network=${RL_NETWORK} \
 --save_path=${SAVE_DIR}/${FINAL_MODEL_NAME} \
---n_tasks=${N_TASKS} \
---nsteps=${N_STEPS} \
---log_interval=${LOG_INTERVAL} \
+--buffer_size=20 \
+--lr=0.01 \
+--exploration_fraction=0.5 \
+--exploration_final_eps=0.1 \
+--learning_starts=${LOG_INTERVAL} \
+--checkpoint_freq=${LOG_INTERVAL} \
 --num_timesteps=${N_TIMESTEPS}"
 
     if [ ${trial} -eq 1 ]; then
