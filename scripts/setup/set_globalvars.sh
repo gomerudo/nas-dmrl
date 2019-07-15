@@ -12,6 +12,3 @@ NAS_DMRL_PATH=${GIT_STORAGE}/nas-dmrl
 # DIRS
 SETUP_SCRIPTS_DIR=${NAS_DMRL_PATH}/scripts
 META_RL_SCRIPTS_DIR=${NAS_DMRL_PATH}/meta-rl
-
-# To Load conda
-SETUP_CONDA_PATH=${SETUP_SCRIPTS_DIR}/setup/setup_condaenv.sh

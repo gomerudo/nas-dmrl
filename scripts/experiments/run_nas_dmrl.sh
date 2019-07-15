@@ -104,14 +104,6 @@ source ${SET_GLOBALVARS_PATH}
 START_TIMESTAMP=`date +%Y%m%d%H%M%S`
 
 ################################################################################
-########################## ACTIVATE CONDA ENVIRONMENT ##########################
-################################################################################
-
-source ${SETUP_CONDA_PATH}
-echo "Activating conda environment ${VENV_NAME}"
-conda activate ${VENV_NAME}
-
-################################################################################
 ########################## MAKE EXPERIMENTS DIRECTORY ##########################
 ################################################################################
 EXPERIMENT_DIR="${WORKSPACE}/results/experiment-${START_TIMESTAMP}"
@@ -198,9 +190,6 @@ for trial in $(seq 1  1 ${N_TRIALS}); do
     sleep ${SLEEP_TIME_SECONDS}
 done
 popd
-
-# Deactivate the environment cause we are done with the python steps
-conda deactivate
 
 # Copy the db of experiments and the actions_info
 cp ${CONFIG_LOG_PATH}/db_experiments.csv ${EXPERIMENT_DIR}/.
