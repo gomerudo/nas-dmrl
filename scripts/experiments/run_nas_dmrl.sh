@@ -140,6 +140,7 @@ nvidia-smi \
 --format=csv \
 -l ${GPU_MONITOR_SECONDS} > ${EXPERIMENT_DIR}/smi-${START_TIMESTAMP}.csv 2>&1 &
 
+export LIMITED_STORAGE=YES
 pushd ${OPENAI_BASELINES_PATH}
 
 if [ ! -d ${CONFIG_LOG_PATH} ]; then
