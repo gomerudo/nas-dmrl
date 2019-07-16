@@ -28,6 +28,10 @@ parse_ini_file() {
     SLEEP_TIME_SECONDS="$(parse_var SleepTimeSec)"
     CONFIG_LOG_PATH="$(parse_var LogPath)"
     LOG_INTERVAL="$(parse_var LogInterval)"
+    GAMMA="$(parse_var Gamma)"
+    LR="$(parse_var Lr)"
+    LR_SCHEDULER="$(parse_var LrScheduler)"
+
 }
 
 ################################################################################
@@ -100,6 +104,12 @@ CURRENT_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && 
 SET_GLOBALVARS_PATH=${CURRENT_SCRIPT_DIR}/../setup/set_globalvars.sh
 source ${SET_GLOBALVARS_PATH}
 
+# Load the conda script
+source ${SETUP_CONDA_PATH}
+# Source the environment
+echo "Activating conda environment ${VENV_NAME}"
+conda activate ${VENV_NAME}
+
 # The start timestamp
 START_TIMESTAMP=`date +%Y%m%d%H%M%S`
 
@@ -167,6 +177,9 @@ for trial in $(seq 1  1 ${N_TRIALS}); do
 --n_tasks=${N_TASKS} \
 --nsteps=${N_STEPS} \
 --log_interval=${LOG_INTERVAL} \
+--gamma=${GAMMA} \
+--lr=${LR} \
+--lrschedule=${LR_SCHEDULER} \
 --num_timesteps=${N_TIMESTEPS}"
 
     if [ ${trial} -eq 1 ]; then
