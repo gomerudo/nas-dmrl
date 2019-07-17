@@ -97,6 +97,8 @@ parse_ini_file
 ############################# SET GLOBAL VARIABLES #############################
 ################################################################################
 
+export WITH_CONDA=YES
+
 # Obtain the script's current directory
 CURRENT_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
