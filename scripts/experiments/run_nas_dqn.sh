@@ -21,13 +21,14 @@ parse_ini_file() {
     RL_NETWORK="$(parse_var Network)"
     FINAL_MODEL_NAME="$(parse_var FinalModelName)"
     N_TASKS="$(parse_var NTasks)"
-    N_STEPS="$(parse_var NSteps)"
     N_TIMESTEPS="$(parse_var NumTimesteps)"
     N_TRIALS="$(parse_var NTrials)"
     GPU_MONITOR_SECONDS="$(parse_var GPUMonitorSec)"
     SLEEP_TIME_SECONDS="$(parse_var SleepTimeSec)"
     CONFIG_LOG_PATH="$(parse_var LogPath)"
     LOG_INTERVAL="$(parse_var LogInterval)"
+    BUFFER_SIZE="$(parse_var BufferSize)"
+    EPSILON="$(parse_var QEpsilon)"
 }
 
 ################################################################################
@@ -93,6 +94,8 @@ parse_ini_file
 ############################# SET GLOBAL VARIABLES #############################
 ################################################################################
 
+export WITH_CONDA=YES
+
 # Obtain the script's current directory
 CURRENT_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
@@ -143,6 +146,8 @@ if [ ! -d ${CONFIG_LOG_PATH} ]; then
     mkdir ${CONFIG_LOG_PATH}
 fi
 
+export LIMITED_STORAGE=YES
+
 for trial in $(seq 1  1 ${N_TRIALS}); do
     echo "Starting trial ${trial}"
 
@@ -171,12 +176,15 @@ for trial in $(seq 1  1 ${N_TRIALS}); do
 --env=${RL_ENVIRONMENT} \
 --network=${RL_NETWORK} \
 --save_path=${SAVE_DIR}/${FINAL_MODEL_NAME} \
---buffer_size=20 \
 --lr=0.01 \
---exploration_fraction=0.5 \
---exploration_final_eps=0.1 \
---learning_starts=${LOG_INTERVAL} \
---checkpoint_freq=${LOG_INTERVAL} \
+--buffer_size=${BUFFER_SIZE} \
+--exploration_fraction=1.0 \
+--exploration_final_eps=${EPSILON} \
+--train_freq=1 \
+--batch_size=20 \
+--checkpoint_freq=100 \
+--gamma=1.0 \
+--target_network_update_freq=100 \
 --num_timesteps=${N_TIMESTEPS}"
 
     if [ ${trial} -eq 1 ]; then
