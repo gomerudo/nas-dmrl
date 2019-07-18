@@ -24,9 +24,13 @@ nasenv:
             kernel_size: Null
             pred1: True
             pred2: True
+        - concat:
+            id: 6
+            kernel_size: Null
+            pred1: True
+            pred2: True
         - terminal:
             id: 7
             kernel_size: Null
             pred1: False
             pred2: False
-
