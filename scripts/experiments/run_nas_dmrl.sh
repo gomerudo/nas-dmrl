@@ -31,7 +31,8 @@ parse_ini_file() {
     GAMMA="$(parse_var Gamma)"
     LR="$(parse_var Lr)"
     LR_SCHEDULER="$(parse_var LrScheduler)"
-
+    LR_SCHEDULER_OFFSET="$(parse_var LrSchedulerOffset)"
+    EXP_TIMESTEPS="$(parse_var ExpTimesteps)"
 }
 
 ################################################################################
@@ -183,6 +184,8 @@ for trial in $(seq 1  1 ${N_TRIALS}); do
 --gamma=${GAMMA} \
 --lr=${LR} \
 --lrschedule=${LR_SCHEDULER} \
+--exp_timesteps=${EXP_TIMESTEPS} \
+--lrschedule_offset=${LR_SCHEDULER_OFFSET} \
 --num_timesteps=${N_TIMESTEPS}"
 
     if [ ${trial} -eq 1 ]; then

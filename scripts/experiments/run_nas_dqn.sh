@@ -133,11 +133,11 @@ cp ${INI_FILE} ${EXPERIMENT_DIR}/.
 echo "A total of ${N_TRIALS} trials will be executed"
 
 # Let the nvidia monitoring running in the background for as long as the process runs
-#echo "Running GPU monitoring tool in the background. It will log every ${GPU_MONITOR_SECONDS} seconds"
-#nvidia-smi \
-#--query-gpu=timestamp,temperature.gpu,utilization.gpu,utilization.memory,memory.total,memory.free,memory.used \
-#--format=csv \
-#-l ${GPU_MONITOR_SECONDS} > ${EXPERIMENT_DIR}/smi-${START_TIMESTAMP}.csv 2>&1 &
+echo "Running GPU monitoring tool in the background. It will log every ${GPU_MONITOR_SECONDS} seconds"
+nvidia-smi \
+--query-gpu=timestamp,temperature.gpu,utilization.gpu,utilization.memory,memory.total,memory.free,memory.used \
+--format=csv \
+-l ${GPU_MONITOR_SECONDS} > ${EXPERIMENT_DIR}/smi-${START_TIMESTAMP}.csv 2>&1 &
 
 pushd ${OPENAI_BASELINES_PATH}
 
