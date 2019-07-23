@@ -11,12 +11,12 @@ nasenv:
             pred2: False
         - maxpooling:
             id: 2
-            kernel_size: [2, 3]
+            kernel_size: [1, 2, 3, 5]
             pred1: True
             pred2: False
         - avgpooling:
             id: 3
-            kernel_size: [2, 3]
+            kernel_size: [1, 2, 3, 5]
             pred1: True
             pred2: False
         - terminal:
