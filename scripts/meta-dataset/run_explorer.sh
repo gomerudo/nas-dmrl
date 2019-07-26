@@ -50,5 +50,5 @@ if [ ! -d ${TFRECORDS_DIR} ]; then
     exit 1
 fi
 
-python ${GIT_STORAGE}/nas-dmrl_md/scripts/meta-dataset/tfrecords_explorer.py \
+python ${GIT_STORAGE}/nas-dmrl/scripts/meta-dataset/tfrecords_explorer.py \
     --path=${TFRECORDS_DIR}
