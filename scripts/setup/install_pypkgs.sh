@@ -20,6 +20,7 @@ conda install tensorflow-gpu=1.12.0
 conda install cudatoolkit=9.0  # Immediately downgrade
 conda install cloudpickle
 conda install Pillow=5.4.1
+conda install scikit-learn
 
 # Not available in conda, use pip
 pip install gym
