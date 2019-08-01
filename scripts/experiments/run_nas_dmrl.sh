@@ -176,6 +176,7 @@ for trial in $(seq 1  1 ${N_TRIALS}); do
     command="time python -m baselines.run \
 --alg=${RL_ALGORITHM} \
 --env=${RL_ENVIRONMENT} \
+--seed=1024
 --network=${RL_NETWORK} \
 --save_path=${SAVE_DIR}/${FINAL_MODEL_NAME} \
 --n_tasks=${N_TASKS} \
