@@ -176,7 +176,6 @@ for trial in $(seq 1  1 ${N_TRIALS}); do
 --env=${RL_ENVIRONMENT} \
 --network=${RL_NETWORK} \
 --save_path=${SAVE_DIR}/${FINAL_MODEL_NAME} \
---lr=0.01 \
 --buffer_size=${BUFFER_SIZE} \
 --exploration_fraction=1.0 \
 --exploration_final_eps=${EPSILON} \
