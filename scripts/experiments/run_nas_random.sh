@@ -31,7 +31,6 @@ while getopts ":c:r" opt; do
     c )
         INI_FILE=$OPTARG
         ;;
-        ;;
     r )
         REMOVE=YES
         ;;
