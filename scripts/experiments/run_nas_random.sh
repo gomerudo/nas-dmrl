@@ -130,7 +130,7 @@ fi
 
 export LIMITED_STORAGE=YES
 
-command="time ${CURRENT_SCRIPT_DIR}/random_search.py \
+command="time python ${CURRENT_SCRIPT_DIR}/random_search.py \
 --log_dir==${EXPERIMENT_DIR} \
 --ntimesteps=10=${N_TIMESTEPS} \
 --random_seed=${RANDOM_SEED}"
