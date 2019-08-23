@@ -26,7 +26,7 @@ def do_random_search(random_seed=1024, log_dir="workspace_rs_mdn10",
     episode_df = None
 
     for _ in range(ntimesteps):
-        action = randint(0, env.action_space.n)
+        action = randint(0, env.action_space.n - 1)
         obs, rew, done, info_dict = env.step(action)
 
         if episode_df is None:
