@@ -88,3 +88,5 @@ if __name__ == '__main__':
     print("Log dir is", log_dir)
     print("Ntimesteps", ntimesteps)
     print("random_seed", random_seed)
+
+    do_random_search(random_seed, log_dir, ntimesteps)
