@@ -15,17 +15,13 @@ def do_random_search(random_seed=1024, log_dir="workspace_rs_mdn10",
 
     seed(random_seed)
 
-    timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
-    print("Starting at:", timestamp)
-
-    episode_log_dir = "{dir}/logs-{ts}".format(
-        dir=log_dir,
-        ts=timestamp
+    episode_log_dir = "{dir}/episode_logs".format(
+        dir=log_dir
     )
     os.makedirs(episode_log_dir, exist_ok=True)
     episode_log_path = "{dir}/{name}.csv".format(
         dir=episode_log_dir,
-        name="episode_results"
+        name="episodes_results"
     )
     episode_df = None
 
