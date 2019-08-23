@@ -79,6 +79,7 @@ if __name__ == '__main__':
     cmd_args = parser.parse_args()
     log_dir = cmd_args.log_dir if cmd_args.log_dir is not None else "workspace_rs_mdn10"
     ntimesteps = cmd_args.ntimesteps if cmd_args.ntimesteps is not None else 8000
+    ntimesteps = int(ntimesteps)
     random_seed = cmd_args.random_seed if cmd_args.random_seed is not None else 1024
 
     print("Log dir is", log_dir)
