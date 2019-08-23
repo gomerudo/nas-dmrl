@@ -132,7 +132,7 @@ export LIMITED_STORAGE=YES
 
 command="time python ${CURRENT_SCRIPT_DIR}/random_search.py \
 --log_dir==${EXPERIMENT_DIR} \
---ntimesteps=10=${N_TIMESTEPS} \
+--ntimesteps=${N_TIMESTEPS} \
 --random_seed=${RANDOM_SEED}"
 
 echo "Command to execute is: ${command}"
