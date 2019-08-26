@@ -11,9 +11,8 @@ import pandas as pd
 
 def do_random_search(random_seed=1024, log_dir="workspace_rs_mdn10", 
                      ntimesteps=8000):
-    env = gym.make("NAS_cifar10-v1")
-
     seed(random_seed)
+    env = gym.make("NAS_cifar10-v1")
 
     episode_log_dir = "{dir}/episode_logs".format(
         dir=log_dir
