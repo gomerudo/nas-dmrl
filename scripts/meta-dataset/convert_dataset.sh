@@ -65,7 +65,7 @@ usage() {
     echo ""
     echo "     convert_dataset.sh -d DATASET_NAME"
     echo ""
-    echo "Supported datasets are: imagenet, omniglot"
+    echo "Supported datasets are: aircraft, cu_birds, dtd, fungi, imagenet, omniglot, quickdraw, traffic_sign, vgg_flower"
 }
 
 run_convertion() {

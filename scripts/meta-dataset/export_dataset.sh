@@ -20,7 +20,7 @@ usage() {
     echo ""
     echo "     export_dataset.sh -d DATASET_ID -t TARGET_FILE [-s IMAGE_SIZE]"
     echo ""
-    echo "Supported IDs are: aircraft, dtd, fungi, quickdraw, vgg_flower, cu_birds, omniglot, traffic_sign"
+    echo "Supported IDs are: aircraft, cu_birds, dtd, fungi, imagenet, omniglot, quickdraw, traffic_sign, vgg_flower"
 }
 
 while getopts ":d:s:t:" opt; do
@@ -67,6 +67,8 @@ if [ -z ${TARGET_FILE} ]; then
     echo "Target file has to be provided"
     usage
 fi
+
+echo "Running conversion via python script"
 python ${GIT_STORAGE}/nas-dmrl_par/scripts/meta-dataset/tfrecords_exporter.py \
     --src_dir=${TFRECORDS_DIR} \
     --imgsize=${IMG_SIZE} \

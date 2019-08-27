@@ -20,7 +20,7 @@ usage() {
     echo ""
     echo "     run_explorer.sh -d DATASET_ID"
     echo ""
-    echo "Supported IDs are: aircraft, dtd, fungi, quickdraw, vgg_flower, cu_birds, mscoco, omniglot, traffic_sign"
+    echo "Supported IDs are: aircraft, cu_birds, dtd, fungi, imagenet, omniglot, quickdraw, traffic_sign, vgg_flower"
 }
 
 while getopts ":d:" opt; do

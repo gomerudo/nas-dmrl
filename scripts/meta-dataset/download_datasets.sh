@@ -61,7 +61,7 @@ usage() {
     echo ""
     echo "     download_dataset.sh -d DATASET_NAME"
     echo ""
-    echo "Supported datasets are: imagenet, omniglot"
+    echo "Supported datasets are: aircraft, cu_birds, dtd, fungi, imagenet, mscoco, omniglot, quickdraw, traffic_sign, vgg_flower"
 }
 
 run_custom_download() {
