@@ -113,3 +113,5 @@ if [ ! -d ${CONFIG_LOG_PATH} ]; then
 fi
 
 command="time python ${CURRENT_SCRIPT_DIR}/policy_evaluation.py"
+echo "Executing ${command}"
+command
