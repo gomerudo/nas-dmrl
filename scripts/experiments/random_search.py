@@ -43,11 +43,11 @@ def do_random_search(random_seed=1024, log_dir="workspace_rs_mdn10",
                 print("Saving database of experiments")
                 env.save_db_experiments()
             if episode_df is not None:
-                outfile = open(episode_log_path, 'a')
+                outfile = open(episode_log_path, 'w')
                 print("Saving episode logs")
                 episode_df.to_csv(outfile)
                 outfile.close()
-                episode_df = None
+                # episode_df = None
 
             env.reset()
 
@@ -58,11 +58,11 @@ def do_random_search(random_seed=1024, log_dir="workspace_rs_mdn10",
         env.save_db_experiments()
 
     if episode_df is not None:
-        outfile = open(episode_log_path, 'a')
+        outfile = open(episode_log_path, 'w')
         print("Saving episode logs")
         episode_df.to_csv(outfile)
         outfile.close()
-        episode_df = None
+        # episode_df = None
 
 if __name__ == '__main__':
     # Define the arguments
