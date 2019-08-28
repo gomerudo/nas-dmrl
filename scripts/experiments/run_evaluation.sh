@@ -114,4 +114,5 @@ fi
 
 command="time python ${CURRENT_SCRIPT_DIR}/policy_evaluation.py"
 echo "Executing ${command}"
-command
+
+${command}
