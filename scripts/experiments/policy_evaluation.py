@@ -94,6 +94,6 @@ if __name__ == '__main__':
         composed_id
     )
 
-    accuracy = res['accuracy']
+    accuracy = res['accuracy']*100
 
     nas_logger.info("Final accuracy is %f", accuracy)
