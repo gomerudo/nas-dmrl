@@ -82,7 +82,7 @@ if __name__ == '__main__':
         )
 
         accuracy = res['accuracy']*100
-        ev_results.append(
+        ev_results = ev_results.append(
             {
                 'epoch': epoch + 1,
                 'test_accuracy': accuracy
@@ -92,8 +92,8 @@ if __name__ == '__main__':
     end_time = time.time()
 
     timestamp = datetime.now()
-    timestamp_str = timestamp.strftime("%Y%m%d%H%M%S%f)")
-    ev_res_path = "{log}/{cid}-{ep}-{time}".format(
+    timestamp_str = timestamp.strftime("%Y%m%d%H%M%S%f")
+    ev_res_path = "{log}/{cid}-{ep}-{time}.csv".format(
         log=log_path,
         cid=composed_id,
         ep=n_epochs,

@@ -100,7 +100,7 @@ if __name__ == '__main__':
         )
 
         accuracy = res['accuracy']*100
-        ev_results.append(
+        ev_results = ev_results.append(
             {
                 'epoch': epoch + 1,
                 'test_accuracy': accuracy
