@@ -1,6 +1,8 @@
 import math
 import time
+from datetime import datetime
 import numpy as np
+import pandas as pd
 import nasgym.utl.configreader as cr
 from nasgym import nas_logger
 from nasgym import CONFIG_INI
@@ -78,9 +80,11 @@ if __name__ == '__main__':
         "Training architecture %s for %d epochs", composed_id, n_epochs
     )
 
+    ev_results = pd.DataFrame(columns=["epoch", "test_accuracy"])
+
     start_time = time.time()
-    for epoch in n_epochs:
-        nas_logger.info("Running epoch %d", epoch)
+    for epoch in range(n_epochs):
+        nas_logger.info("Running epoch %d", epoch + 1)
         evaluator.train(
             train_data=train_features,
             train_labels=train_labels,
@@ -96,15 +100,31 @@ if __name__ == '__main__':
         )
 
         accuracy = res['accuracy']*100
-        nas_logger.debug("Accuracy is %f", accuracy)
+        ev_results.append(
+            {
+                'epoch': epoch + 1,
+                'test_accuracy': accuracy
+            }
+        )
+    end_time = time.time()
+
+    timestamp = datetime.now()
+    timestamp_str = timestamp.strftime("%Y%m%d%H%M%S%f)")
+    ev_res_path = "{log}/{cid}-{ep}-{time}".format(
+        log=log_path,
+        cid=composed_id,
+        ep=n_epochs,
+        time=timestamp_str
+    )
+
+    outfile = open(ev_res_path, 'w')
+    ev_results.to_csv(outfile)
+    outfile.close()
 
     nas_logger.debug(
         "Train-evaluation procedure finished for architecture %s",
         composed_id
     )
-
-    end_time = time.time()
-    accuracy = res['accuracy']*100
 
     nas_logger.info("Final accuracy is %f", accuracy)
     nas_logger.info("Training-evaluation time %f", (end_time - start_time))
