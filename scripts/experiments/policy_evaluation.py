@@ -59,7 +59,7 @@ if __name__ == '__main__':
         op_beta1=0.9,
         op_beta2=0.999,
         op_epsilon=10e-08,
-        fcl_units=1024,
+        fcl_units=4096,
         dropout_rate=0.4,
         n_obs_train=trainset_length
     )
@@ -110,8 +110,8 @@ if __name__ == '__main__':
     end_time = time.time()
 
     timestamp = datetime.now()
-    timestamp_str = timestamp.strftime("%Y%m%d%H%M%S%f)")
-    ev_res_path = "{log}/{cid}-{ep}-{time}".format(
+    timestamp_str = timestamp.strftime("%Y%m%d%H%M%S%f")
+    ev_res_path = "{log}/{cid}-{ep}-{time}.csv".format(
         log=log_path,
         cid=composed_id,
         ep=n_epochs,
