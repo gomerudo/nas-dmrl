@@ -104,7 +104,8 @@ if __name__ == '__main__':
             {
                 'epoch': epoch + 1,
                 'test_accuracy': accuracy
-            }
+            },
+            ignore_index=True
         )
     end_time = time.time()
 
