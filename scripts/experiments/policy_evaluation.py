@@ -1,4 +1,5 @@
 import math
+import time
 import numpy as np
 import nasgym.utl.configreader as cr
 from nasgym import nas_logger
@@ -76,24 +77,34 @@ if __name__ == '__main__':
     nas_logger.debug(
         "Training architecture %s for %d epochs", composed_id, n_epochs
     )
-    evaluator.train(
-        train_data=train_features,
-        train_labels=train_labels,
-        train_input_fn=train_input_fn,
-        n_epochs=n_epochs  # As specified by BlockQNN
-    )
 
-    nas_logger.debug("Evaluating architecture %s", composed_id)
-    res = evaluator.evaluate(
-        eval_data=val_features,
-        eval_labels=val_labels,
-        eval_input_fn=eval_input_fn
-    )
+    start_time = time.time()
+    for epoch in n_epochs:
+        nas_logger.info("Running epoch %d", epoch)
+        evaluator.train(
+            train_data=train_features,
+            train_labels=train_labels,
+            train_input_fn=train_input_fn,
+            n_epochs=1  # As specified by BlockQNN
+        )
+
+        nas_logger.debug("Evaluating architecture %s", composed_id)
+        res = evaluator.evaluate(
+            eval_data=val_features,
+            eval_labels=val_labels,
+            eval_input_fn=eval_input_fn
+        )
+
+        accuracy = res['accuracy']*100
+        nas_logger.debug("Accuracy is %f", accuracy)
+
     nas_logger.debug(
         "Train-evaluation procedure finished for architecture %s",
         composed_id
     )
 
+    end_time = time.time()
     accuracy = res['accuracy']*100
 
     nas_logger.info("Final accuracy is %f", accuracy)
+    nas_logger.info("Training-evaluation time %f", (end_time - start_time))
