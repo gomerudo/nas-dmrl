@@ -2,6 +2,25 @@
 set -e
 
 ################################################################################
+## Wrapper script to download the specified dataset.                          ##
+##                                                                            ##
+## It downloads the files as specified in the meta-dataset documentation:     ##
+##  - https://github.com/google-research/meta-dataset/blob/master/doc/        ##
+##    dataset_conversion.md#ilsvrc_2012                                       ##
+##                                                                            ##
+## All downloading happens in the directory ${WORKSPACE}/metadataset_storage  ##
+##                                                                            ##
+## All the env. vars and options from scripts/setup/set_globalvars.sh and     ##
+## scripts/setup/setup_condaenv.sh apply.                                     ##
+##                                                                            ##
+## Usage:                                                                     ##
+##   download_dataset.sh -d DATASET_NAME                                      ##
+##                                                                            ##
+## Supported datasets are: aircraft, cu_birds, dtd, fungi, imagenet,          ##
+## omniglot, quickdraw, traffic_sign, vgg_flower.                             ##
+################################################################################
+
+################################################################################
 ############ DEFINE THE GLOBAL VARIABLES AND ENVIRONMENT VARIABLES  ############
 ################################################################################
 

@@ -1,6 +1,23 @@
 #!/bin/bash
 set -e
 
+################################################################################
+## Export a meta-dataset's dataset to a CSV file.                             ##
+##                                                                            ##
+## Assumes that the TFRecords exist in the directory                          ##
+## ${WORKSPACE}/metadataset_storage/records/DATASET_ID                        ##
+##                                                                            ##
+## All the env. vars and options from scripts/setup/set_globalvars.sh and     ##
+## scripts/setup/setup_condaenv.sh apply.                                     ##
+##                                                                            ##
+## Usage:                                                                     ##
+##   export_dataset.sh -d DATASET_ID -t TARGET_FILE [-s IMAGE_SIZE]           ##
+##                                                                            ##
+## - Default IMAGE_SIZE: 84                                                   ##
+## - Supported datasets are: aircraft, cu_birds, dtd, fungi, imagenet,        ##
+##   omniglot, quickdraw, traffic_sign, vgg_flower.                           ##
+################################################################################
+
 CURRENT_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SET_GLOBALVARS_PATH=${CURRENT_SCRIPT_DIR}/../setup/set_globalvars.sh
 

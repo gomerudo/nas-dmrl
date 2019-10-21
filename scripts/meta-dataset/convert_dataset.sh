@@ -1,6 +1,28 @@
 #!/bin/bash
 set -e
 
+################################################################################
+## Script to convert the specified dataset to TFRecords using the             ##
+## meta-dataset's code.                                                       ##
+##                                                                            ##
+## Assumptions:                                                               ##
+##  - The desired dataset has already been downloaded. See:                   ##
+##    scripts/meta-dataset/download_datasets.sh                               ##
+##  - The meta-dataset's code is in ${WORKSPACE}/git_storage/meta-dataset     ##
+##                                                                            ##
+## The convertion happens in the directory:                                   ##
+##   ${WORKSPACE}/metadataset_storage/records                                 ##
+##                                                                            ##
+## All the env. vars and options from scripts/setup/set_globalvars.sh and     ##
+## scripts/setup/setup_condaenv.sh apply.                                     ##
+##                                                                            ##
+## Usage:                                                                     ##
+##   convert_dataset.sh -d DATASET_NAME                                       ##
+##                                                                            ##
+## Supported datasets are: aircraft, cu_birds, dtd, fungi, imagenet,          ##
+## omniglot, quickdraw, traffic_sign, vgg_flower.                             ##
+################################################################################
+
 
 CURRENT_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SET_GLOBALVARS_PATH=${CURRENT_SCRIPT_DIR}/../setup/set_globalvars.sh
