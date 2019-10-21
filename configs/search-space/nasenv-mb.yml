@@ -1,5 +1,5 @@
 nasenv:
-    name: Default Environment
+    name: Multi-branch environment
     version: 1.0
     max_nlayers: 10
     encoding: NSC

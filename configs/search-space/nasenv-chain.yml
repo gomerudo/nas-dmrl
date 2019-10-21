@@ -1,5 +1,5 @@
 nasenv:
-    name: Default Environment
+    name: Chain-structured environment
     version: 1.0
     max_nlayers: 10
     encoding: NSC
@@ -19,18 +19,9 @@ nasenv:
             kernel_size: [2, 3]
             pred1: True
             pred2: False
-        - add:
-            id: 5
-            kernel_size: Null
-            pred1: True
-            pred2: True
-        - concat:
-            id: 6
-            kernel_size: Null
-            pred1: True
-            pred2: True
         - terminal:
             id: 7
             kernel_size: Null
             pred1: False
             pred2: False
+
