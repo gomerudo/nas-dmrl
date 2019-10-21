@@ -1,5 +1,16 @@
 #!/bin/bash
 
+################################################################################
+## Load the conda.sh script needed to use miniconda at runtime.               ##
+##                                                                            ##
+## The next environment variables can be set before running this script:      ##
+##  - MINICONDA_PATH (Default is: $HOME/workspace/miniconda3)                 ##
+##  - VENV_NAME (Default is: nasdmrl)                                         ##
+##                                                                            ##
+## To enable miniconda loading make sure the next env. vars are set:          ##
+##  - WITH_CONDA = YES                                                        ##
+################################################################################
+
 # If the variable is set and it is yes
 if [ -n ${WITH_CONDA} ] && [ "${WITH_CONDA}" == "YES" ]; then
     

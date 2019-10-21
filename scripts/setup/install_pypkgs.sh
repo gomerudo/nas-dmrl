@@ -1,5 +1,17 @@
 #!/bin/bash
 
+################################################################################
+## Install the required packages for all the scripts/experiments.             ##
+##                                                                            ##
+## Assumptions of this script are:                                            ##
+##  - Work within a conda environment                                         ##
+##  - Tensorflow version: 1.12                                                ##
+##  - CUDA version: 9                                                         ##
+##                                                                            ##
+## All the env. vars and options from scripts/setup/set_globalvars.sh and     ##
+## scripts/setup/setup_condaenv.sh apply.                                     ##
+################################################################################
+
 CURRENT_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SET_GLOBALVARS_PATH=${CURRENT_SCRIPT_DIR}/set_globalvars.sh
 
