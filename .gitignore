@@ -109,3 +109,8 @@ venv.bak/
 
 # vs code
 .vscode/**
+
+# my workspace
+workspace/**
+**/.DS_Store
+**/Untitled.ipynb
