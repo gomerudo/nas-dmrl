@@ -1,40 +1,29 @@
+"""Train a reduced version of the VGGNet network for 100 epochs.
+
+It relies on the NetBenchmarking class from the NasGym. Similarly to
+scripts/experiments-evaluation/network_evaluation.py, the network is trained
+for 100 epochs using exponential decay (for fairness). The final accuracy is
+printed.
+"""
+
 import math
 import time
 from datetime import datetime
-import numpy as np
 import pandas as pd
 import nasgym.utl.configreader as cr
 from nasgym import nas_logger
 from nasgym import CONFIG_INI
-from nasgym.net_ops.net_eval import NetEvaluation
+from nasgym.net_ops.net_benchmark import NetBenchmarking
 from nasgym.envs.factories import DatasetHandlerFactory
 from nasgym.envs.factories import TrainerFactory
-from nasgym.utl.miscellaneous import compute_str_hash
-from nasgym.utl.miscellaneous import state_to_string
 
 
 if __name__ == '__main__':
 
-    state = np.array([
-        [0, 0, 0, 0, 0],  # 1
-        [0, 0, 0, 0, 0],  # 2
-        [0, 0, 0, 0, 0],  # 3
-        [0, 0, 0, 0, 0],  # 4
-        [0, 0, 0, 0, 0],  # 5
-        [1, 1, 3, 0, 0],  # 6
-        [2, 1, 3, 1, 0],  # 7
-        [3, 1, 3, 2, 0],  # 8
-        [4, 2, 2, 3, 0],  # 9
-        [5, 2, 3, 4, 0],  # 10
-    ])
-
     n_epochs = 100
     dataset_handler = DatasetHandlerFactory.get_handler("meta-dataset")
+    composed_id = "vgg19_{d}".format(d=dataset_handler.current_dataset_name())
 
-    hash_state = compute_str_hash(state_to_string(state))
-    composed_id = "{d}-{h}".format(
-        d=dataset_handler.current_dataset_name(), h=hash_state
-    )
     try:
         log_path = CONFIG_INI[cr.SEC_DEFAULT][cr.PROP_LOGPATH]
     except KeyError:
@@ -48,18 +37,16 @@ if __name__ == '__main__':
     trainset_length = math.floor(
         dataset_handler.current_n_observations()*(1. - split_prop)
     )
-    evaluator = NetEvaluation(
-        encoded_network=state,
+    evaluator = NetBenchmarking(
         input_shape=dataset_handler.current_shape(),
         n_classes=dataset_handler.current_n_classes(),
         batch_size=batch_size,
         log_path=log_trainer_dir,
-        variable_scope="cnn-{h}".format(h=hash_state),
+        variable_scope="cnn-{h}".format(h=composed_id),
         n_epochs=n_epochs,
         op_beta1=0.9,
         op_beta2=0.999,
         op_epsilon=10e-08,
-        fcl_units=4096,
         dropout_rate=0.4,
         n_obs_train=trainset_length
     )

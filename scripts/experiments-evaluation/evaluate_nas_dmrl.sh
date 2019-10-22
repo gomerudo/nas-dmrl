@@ -1,13 +1,32 @@
 #!/bin/bash
 
 ################################################################################
+## Script to evaluate a deep meta-RL policy on a Gym environment, reading the ##
+## configuration from a config*.ini file.                                     ##
+##                                                                            ##
+## Assumptions:                                                               ##
+##  - The config*.ini is correctly parsed and contains all the variables      ##
+##    required by the function parse_ini_file() of this script.               ##
+##  - We work under a conda environment, therefore we set the WITH_CONDA=YES  ##
+##    environment variable.                                                   ##
+##  - The GPU is a NVIDIA one, and the `nvidia-smi` tool is installed and     ##
+##    accesible.                                                              ##
+##  - The instance has limited storage, therefore we set LIMITED_STORAGE=YES  ##
+##    which makes that, for every sampled network, the TensorFlow logs get    ##
+##    removed.                                                                ##
+##                                                                            ##
+## All the env. vars and options from scripts/setup/set_globalvars.sh and     ##
+## scripts/setup/setup_condaenv.sh apply.                                     ##
+################################################################################
+
+################################################################################
 ################################## FUNCTIONS  ##################################
 ################################################################################
 
 usage() {
     echo "Usage:"
     echo ""
-    echo "     run_nas_dmrl.sh -c CONFIG_FILE -m PREWARM_MODEL [-r]"
+    echo "     evaluate_nas_dmrl.sh -c CONFIG_FILE -m PREWARM_MODEL [-r]"
     echo ""
 }
 
@@ -19,6 +38,8 @@ parse_ini_file() {
     RL_ALGORITHM="$(parse_var Algorithm)"
     RL_ENVIRONMENT="$(parse_var Environment)"
     RL_NETWORK="$(parse_var Network)"
+    N_TASKS="$(parse_var NTasks)"
+    N_TRIALS="$(parse_var NTrials)"
     GPU_MONITOR_SECONDS="$(parse_var GPUMonitorSec)"
     SLEEP_TIME_SECONDS="$(parse_var SleepTimeSec)"
     CONFIG_LOG_PATH="$(parse_var LogPath)"
@@ -147,44 +168,51 @@ if [ ! -d ${CONFIG_LOG_PATH} ]; then
     mkdir ${CONFIG_LOG_PATH}
 fi
 
-echo "Starting trial ${trial}"
+for trial in $(seq 1  1 ${N_TRIALS}); do
+    echo "Starting trial ${trial}"
 
-# We sleep for few seconds to let the memory release and the environment stabilize
-# Each trial will have its one timestamp to isolate the subexperiments
-TRIAL_TIMESTAMP=`date +%Y%m%d%H%M%S`
+    # We sleep for few seconds to let the memory release and the environment stabilize
+    # Each trial will have its one timestamp to isolate the subexperiments
+    TRIAL_TIMESTAMP=`date +%Y%m%d%H%M%S`
 
-# We obtain the last OPENAI_LOGDIR in the environmet, to use it as the
-# warmup model.
-LAST_OPENAI_LOGDIR="${OPENAI_LOGDIR}"
+    # We obtain the last OPENAI_LOGDIR in the environmet, to use it as the
+    # warmup model.
+    LAST_OPENAI_LOGDIR="${OPENAI_LOGDIR}"
 
-# Export the OPENAI_LOGDIR as needed by openai-baselines project
-LOGDIR="${EXPERIMENT_DIR}/openai-${TRIAL_TIMESTAMP}"
-export OPENAI_LOGDIR=${LOGDIR}
+    # Export the OPENAI_LOGDIR as needed by openai-baselines project
+    LOGDIR="${EXPERIMENT_DIR}/openai-${TRIAL_TIMESTAMP}"
+    export OPENAI_LOGDIR=${LOGDIR}
 
-# Define the place where we will store the resulting model
-SAVE_DIR=${OPENAI_LOGDIR}/models
+    # Define the place where we will store the resulting model
+    SAVE_DIR=${OPENAI_LOGDIR}/models
 
-if [ ! -d ${SAVE_DIR} ]; then
-    mkdir -p ${SAVE_DIR}
-fi
+    if [ ! -d ${SAVE_DIR} ]; then
+        mkdir -p ${SAVE_DIR}
+    fi
 
-command="time python -m baselines.run \
+    command="time python -m baselines.run \
 --alg=${RL_ALGORITHM} \
 --env=${RL_ENVIRONMENT} \
 --seed=1024 \
 --network=${RL_NETWORK} \
+--n_tasks=${N_TASKS} \
 --num_timesteps=${N_TIMESTEPS} \
 --play"
 
-command="${command} --load_path=${WARMUP_MODEL}"
+    if [ ${trial} -eq 1 ]; then
+        command="${command} --load_path=${WARMUP_MODEL}"
+    fi
 
-echo "Command to execute is: ${command}"
-${command}
+    echo "Command to execute is: ${command}"
+    ${command}
+    
+    if [ ! -z ${REMOVE} ]; then
+        rm -rf ${CONFIG_LOG_PATH}/trainer*
+    fi
 
-if [ ! -z ${REMOVE} ]; then
-    rm -rf ${CONFIG_LOG_PATH}/trainer*
-fi
-
+    # Always wait after the command has been executed
+    sleep ${SLEEP_TIME_SECONDS}
+done
 popd
 
 # Copy the db of experiments and the actions_info

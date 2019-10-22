@@ -1,12 +1,16 @@
+"""Perform random search on the default NAS environment of the NasGym.
+
+If not specified, the number of steps to perform is 8000, the random seed for
+reproducibility is 1024 and the log dir is `workspace_rs_mdn10`. The script
+forces to save the database of experiments and the episode logs at the end of
+every episode.
+"""
+
 import os
-from datetime import datetime
 from random import seed
-from random import random
 from random import randint
 import argparse
-
 import gym
-import nasgym
 import pandas as pd
 
 def do_random_search(random_seed=1024, log_dir="workspace_rs_mdn10", 

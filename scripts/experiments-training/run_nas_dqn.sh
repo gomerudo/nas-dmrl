@@ -1,6 +1,25 @@
 #!/bin/bash
 
 ################################################################################
+## Script to run a DeepQN training on a Gym environment, reading the          ##
+## configuration from a config*.ini file.                                     ##
+##                                                                            ##
+## Assumptions:                                                               ##
+##  - The config*.ini is correctly parsed and contains all the variables      ##
+##    required by the function parse_ini_file() of this script.               ##
+##  - We work under a conda environment, therefore we set the WITH_CONDA=YES  ##
+##    environment variable.                                                   ##
+##  - The GPU is a NVIDIA one, and the `nvidia-smi` tool is installed and     ##
+##    accesible.                                                              ##
+##  - The instance has limited storage, therefore we set LIMITED_STORAGE=YES  ##
+##    which makes that, for every sampled network, the TensorFlow logs get    ##
+##    removed.                                                                ##
+##                                                                            ##
+## All the env. vars and options from scripts/setup/set_globalvars.sh and     ##
+## scripts/setup/setup_condaenv.sh apply.                                     ##
+################################################################################
+
+################################################################################
 ################################## FUNCTIONS  ##################################
 ################################################################################
 
@@ -21,18 +40,14 @@ parse_ini_file() {
     RL_NETWORK="$(parse_var Network)"
     FINAL_MODEL_NAME="$(parse_var FinalModelName)"
     N_TASKS="$(parse_var NTasks)"
-    N_STEPS="$(parse_var NSteps)"
     N_TIMESTEPS="$(parse_var NumTimesteps)"
     N_TRIALS="$(parse_var NTrials)"
     GPU_MONITOR_SECONDS="$(parse_var GPUMonitorSec)"
     SLEEP_TIME_SECONDS="$(parse_var SleepTimeSec)"
     CONFIG_LOG_PATH="$(parse_var LogPath)"
     LOG_INTERVAL="$(parse_var LogInterval)"
-    GAMMA="$(parse_var Gamma)"
-    LR="$(parse_var Lr)"
-    LR_SCHEDULER="$(parse_var LrScheduler)"
-    LR_SCHEDULER_OFFSET="$(parse_var LrSchedulerOffset)"
-    EXP_TIMESTEPS="$(parse_var ExpTimesteps)"
+    BUFFER_SIZE="$(parse_var BufferSize)"
+    EPSILON="$(parse_var QEpsilon)"
 }
 
 ################################################################################
@@ -143,13 +158,14 @@ nvidia-smi \
 --format=csv \
 -l ${GPU_MONITOR_SECONDS} > ${EXPERIMENT_DIR}/smi-${START_TIMESTAMP}.csv 2>&1 &
 
-export LIMITED_STORAGE=YES
 pushd ${OPENAI_BASELINES_PATH}
 
 if [ ! -d ${CONFIG_LOG_PATH} ]; then
     echo "Making workspace directory"
     mkdir ${CONFIG_LOG_PATH}
 fi
+
+export LIMITED_STORAGE=YES
 
 for trial in $(seq 1  1 ${N_TRIALS}); do
     echo "Starting trial ${trial}"
@@ -173,20 +189,21 @@ for trial in $(seq 1  1 ${N_TRIALS}); do
         mkdir -p ${SAVE_DIR}
     fi
 
+# python -m baselines.run --alg=deepq --env=PongNoFrameskip-v4 --network=mlp --num_timesteps=1e5
     command="time python -m baselines.run \
 --alg=${RL_ALGORITHM} \
 --env=${RL_ENVIRONMENT} \
 --seed=1024 \
 --network=${RL_NETWORK} \
 --save_path=${SAVE_DIR}/${FINAL_MODEL_NAME} \
---n_tasks=${N_TASKS} \
---nsteps=${N_STEPS} \
---log_interval=${LOG_INTERVAL} \
---gamma=${GAMMA} \
---lr=${LR} \
---lrschedule=${LR_SCHEDULER} \
---exp_timesteps=${EXP_TIMESTEPS} \
---lrschedule_offset=${LR_SCHEDULER_OFFSET} \
+--buffer_size=${BUFFER_SIZE} \
+--exploration_fraction=1.0 \
+--exploration_final_eps=${EPSILON} \
+--train_freq=1 \
+--batch_size=20 \
+--checkpoint_freq=100 \
+--gamma=1.0 \
+--target_network_update_freq=100 \
 --num_timesteps=${N_TIMESTEPS}"
 
     if [ ${trial} -eq 1 ]; then
@@ -201,7 +218,7 @@ for trial in $(seq 1  1 ${N_TRIALS}); do
 
     echo "Command to execute is: ${command}"
     ${command}
-    
+
     if [ ! -z ${REMOVE} ]; then
         rm -rf ${CONFIG_LOG_PATH}/trainer*
     fi
@@ -221,4 +238,3 @@ dir_name=`basename ${EXPERIMENT_DIR}`
 echo "Zipping the experiments ..."
 zip -qr ${dir_name}.zip ${dir_name}
 popd
-

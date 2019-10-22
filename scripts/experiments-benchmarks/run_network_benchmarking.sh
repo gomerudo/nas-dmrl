@@ -1,13 +1,32 @@
 #!/bin/bash
 
 ################################################################################
+## Script to train the benchmark network (shorthened VGGNet) on a dataset     ##
+## from the meta-dataset.                                                     ##
+##                                                                            ##
+## Assumptions:                                                               ##
+##  - The config*.ini is correctly parsed and contains all the variables      ##
+##    required by the function parse_ini_file() of this script.               ##
+##  - We work under a conda environment, therefore we set the WITH_CONDA=YES  ##
+##    environment variable.                                                   ##
+##  - The GPU is a NVIDIA one, and the `nvidia-smi` tool is installed and     ##
+##    accesible.                                                              ##
+##  - The instance has limited storage, therefore we set LIMITED_STORAGE=YES  ##
+##    which makes that, for every sampled network, the TensorFlow logs get    ##
+##    removed.                                                                ##
+##                                                                            ##
+## All the env. vars and options from scripts/setup/set_globalvars.sh and     ##
+## scripts/setup/setup_condaenv.sh apply.                                     ##
+################################################################################
+
+################################################################################
 ################################## FUNCTIONS  ##################################
 ################################################################################
 
 usage() {
     echo "Usage:"
     echo ""
-    echo "     run_evaluation.sh -c CONFIG_FILE"
+    echo "     run_benchmarking.sh -c CONFIG_FILE"
     echo ""
 }
 
@@ -112,7 +131,7 @@ if [ ! -d ${CONFIG_LOG_PATH} ]; then
     mkdir ${CONFIG_LOG_PATH}
 fi
 
-command="time python ${CURRENT_SCRIPT_DIR}/policy_evaluation.py"
+command="time python ${CURRENT_SCRIPT_DIR}/network_benchmarking.py"
 echo "Executing ${command}"
 
 ${command}

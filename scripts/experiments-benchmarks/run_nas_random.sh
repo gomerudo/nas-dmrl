@@ -1,6 +1,25 @@
 #!/bin/bash
 
 ################################################################################
+## Script to perform a random search on a Gym environment, reading the        ##
+## configuration from a config*.ini file.                                     ##
+##                                                                            ##
+## Assumptions:                                                               ##
+##  - The config*.ini is correctly parsed and contains all the variables      ##
+##    required by the function parse_ini_file() of this script.               ##
+##  - We work under a conda environment, therefore we set the WITH_CONDA=YES  ##
+##    environment variable.                                                   ##
+##  - The GPU is a NVIDIA one, and the `nvidia-smi` tool is installed and     ##
+##    accesible.                                                              ##
+##  - The instance has limited storage, therefore we set LIMITED_STORAGE=YES  ##
+##    which makes that, for every sampled network, the TensorFlow logs get    ##
+##    removed.                                                                ##
+##                                                                            ##
+## All the env. vars and options from scripts/setup/set_globalvars.sh and     ##
+## scripts/setup/setup_condaenv.sh apply.                                     ##
+################################################################################
+
+################################################################################
 ################################## FUNCTIONS  ##################################
 ################################################################################
 
