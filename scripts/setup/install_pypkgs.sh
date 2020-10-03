@@ -35,7 +35,7 @@ conda install Pillow=5.4.1
 conda install scikit-learn
 
 # Not available in conda, use pip
-pip install gym
+pip install gym==0.13.1
 pip install opencv-python
 pip install atari_py
 pip install gin-config
